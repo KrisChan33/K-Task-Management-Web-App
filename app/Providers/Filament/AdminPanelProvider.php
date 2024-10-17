@@ -24,6 +24,7 @@ use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Joaopaulolndev\FilamentEditProfile\FilamentEditProfilePlugin;
 use Joaopaulolndev\FilamentEditProfile\Pages\EditProfilePage;
+use Stephenjude\FilamentTwoFactorAuthentication\TwoFactorAuthenticationPlugin;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -48,7 +49,7 @@ class AdminPanelProvider extends PanelProvider
             
             //Themes and fonts and sizes are
             ->defaultThemeMode(ThemeMode::Dark)
-            ->font('DM Sans, Bold, 800')
+            ->font('DM Sans')
             ->colors([
                 'danger' => Color::Rose,
                 'info' => Color::Blue,
@@ -82,6 +83,8 @@ class AdminPanelProvider extends PanelProvider
                 Authenticate::class,
             ])->plugins([
                FilamentShieldPlugin::make(),
+
+
                FilamentEditProfilePlugin::make()
                     ->slug('My Profile')
                     ->setTitle('My Profile')
@@ -105,10 +108,19 @@ class AdminPanelProvider extends PanelProvider
                         value: true,
                         directory: 'avatars', // image will be stored in 'storage/app/public/avatars
                         rules: 'mimes:jpeg,png|max:1024' //only accept jpeg and png files with a maximum size of 1MB
-                    )
+                    ),
                     // ->customProfileComponents([
                     //     \App\Livewire\CustomProfileComponent::class,])
+                    
+                    // Enforce 2FA setup for all users
+                    TwoFactorAuthenticationPlugin::make()
+                    ->addTwoFactorMenuItem() // Add 2FA settings to user menu items
+                    ->enforceTwoFactorSetup(
+                        false, // Enforce 2FA setup for all users
+                    ) 
 
+
+                    //add new plugin here VVV
             ])
             //for edit-profile-plugin
             ->userMenuItems([

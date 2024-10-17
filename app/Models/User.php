@@ -14,11 +14,11 @@ use Filament\Panel;
 use Filament\Models\Contracts\HasAvatar;
 use Illuminate\Support\Facades\Storage;
 use Spatie\Permission\Traits\HasRoles;
-
+use Stephenjude\FilamentTwoFactorAuthentication\TwoFactorAuthenticatable;
 
 class User extends Authenticatable implements FilamentUser, HasAvatar//, MustVerifyEmail
 {
-    use HasApiTokens, HasFactory, Notifiable, HasRoles, HasPanelShield;//Authorizable ,HasPanelShield
+    use HasApiTokens, HasFactory, Notifiable, HasRoles, HasPanelShield, TwoFactorAuthenticatable;// 
     /**
      * The attributes that are mass assignable.
      *
@@ -83,3 +83,4 @@ class User extends Authenticatable implements FilamentUser, HasAvatar//, MustVer
         ;
     }
 }
+
