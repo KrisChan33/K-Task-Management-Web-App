@@ -27,6 +27,6 @@ Route::get('register', function () {
 
 Route::get('/home', function () {
     return view('welcome');
-})->name('home');
+});
 
 // Route::post('password/reset')->name('filament.K-Task-Management-Sys.auth.password-reset.update');

@@ -51,8 +51,6 @@ class User extends Authenticatable implements FilamentUser, HasAvatar//, MustVer
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
-    
-
 
     //for avatar edit profile
     public function getFilamentAvatarUrl(): ?string

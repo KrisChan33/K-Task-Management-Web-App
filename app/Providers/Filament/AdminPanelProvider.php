@@ -40,7 +40,7 @@ class AdminPanelProvider extends PanelProvider
             ->registration()
             // ->passwordReset()
             ->emailVerification()
-            ->profile(EditProfile::class)//->profile(isSimple: false)
+            ->profile(EditProfilePage::class)//->profile(isSimple: false)
             //breadcrumbs navigation upper part of page that informs the user of their current location within the application
             // ->breadcrumbs(false);
             

@@ -27,8 +27,6 @@ use Filament\Tables\Actions\ActionGroup;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Actions\ViewAction;
-
-
 use Filament\Tables\Columns\SelectColumn;
 use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Enums\ActionsPosition;
@@ -47,18 +45,18 @@ class UserResource extends Resource
         return $form
             ->schema([
                 // Split::make([
-                   Section::make('User Information')
-                    ->schema([
-                            TextInput::make('name')
-                                ->placeholder('John Doe')
-                                ->required()
-                                ->autofocus()
-                                ->label('Full Name')
-                                ->hint('Enter the full name')
-                                ->regex('/^[a-zA-Z\s-]+$/')
-                                ->required()
-                                ->columnspan(4)
-                                ->hintIcon('heroicon-m-question-mark-circle', tooltip: 'This is the full name it will show in the system'),
+                    Section::make('User Information')
+                        ->schema([
+                                TextInput::make('name')
+                                    ->placeholder('John Doe')
+                                    ->required()
+                                    ->autofocus()
+                                    ->label('Full Name')
+                                    ->hint('Enter the full name')
+                                    ->regex('/^[a-zA-Z\s-]+$/')
+                                    ->required()
+                                    ->columnspan(4)
+                                    ->hintIcon('heroicon-m-question-mark-circle', tooltip: 'This is the full name it will show in the system'),
                             TextInput::make('email')
                                 ->label('Email')
                                 ->required()
