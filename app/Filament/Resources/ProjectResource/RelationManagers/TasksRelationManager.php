@@ -8,6 +8,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
 class TasksRelationManager extends RelationManager
@@ -28,6 +29,7 @@ class TasksRelationManager extends RelationManager
                                 'in-progress' => 'In Progress',
                                 'completed' => 'Completed',
                             ])
+                            ->visibleOn('update')
                             ->default('pending')
                             ->columnSpanFull()
                             ->required(),
@@ -47,11 +49,15 @@ class TasksRelationManager extends RelationManager
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('repeater_data.name')
-                    ->label('Task Name'),
-                Tables\Columns\TextColumn::make('repeater_data.description')
+                TextColumn::make('project.name')
+                    ->label('Task Name')
+                    ->searchable()
+                    ->sortable()
+                    ->wrap(),
+                    
+                TextColumn::make('project.description')
                     ->label('Description'),
-                Tables\Columns\TextColumn::make('repeater_data.status')
+                TextColumn::make('project.status')
                     ->label('Status'),
             ])
             ->headerActions([

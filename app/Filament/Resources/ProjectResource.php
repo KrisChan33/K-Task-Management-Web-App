@@ -13,6 +13,7 @@ use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\MarkdownEditor;
 use Filament\Forms\Components\Placeholder;
+use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Split;
@@ -96,7 +97,53 @@ class ProjectResource extends Resource
                 '2xl' => 12,
             ]
 
-        )->columnSpanFull()
+        )->columnSpanFull(),
+
+        
+
+        //for Task
+        Section::make('Tasks')
+        ->description('Fill out the form below to create a new task. Provide the task name and other necessary details to get started.')
+        
+        ->schema([
+            Repeater::make('repeater_data')
+            ->columns(2)
+            ->schema([
+                Select::make('status')
+                    ->label('Status')
+                    ->options([
+                        'pending' => 'Pending',
+                        'in-progress' => 'In Progress',
+                        'completed' => 'Completed',
+                    ])
+                    ->visibleOn('update')
+                    ->nullable()
+                    ->columnSpanFull()
+                    ->required(),
+                TextInput::make('name')
+                    ->label('Task Name')
+                    ->columnSpanFull()
+                    ->required(),
+                TextInput::make('description')
+                    ->label('Description')
+                    ->columnSpanFull()
+                    ->required(),
+            ])
+                ->columns(2)
+                ->defaultItems(30)
+                ->reorderableWithButtons()
+                ->collapsible()
+                ->cloneable()
+                ->grid(3)
+                ->orderColumn('sort')
+                ->minItems(0)
+                ->maxItems(30)
+                ->label('Manage Tasks')
+            ]),
+
+
+
+
 
             ]);
     }
@@ -147,7 +194,7 @@ class ProjectResource extends Resource
     public static function getRelations(): array
     {
         return [
-            TasksRelationManager::class,
+            // TasksRelationManager::class,
         ];
     }
 

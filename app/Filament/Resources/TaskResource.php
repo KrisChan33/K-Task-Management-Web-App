@@ -52,12 +52,22 @@ class TaskResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('repeater_data.name')
-                    ->label('Task Name'),
+                    ->label('Task Name')
+                    ->limit(25)
+                    ->searchable()
+                    ->sortable(),
+                    
                 TextColumn::make('repeater_data.description')
-                    ->label('Description'),
+                    ->label('Description')
+                    ->limit(30)
+                    ->searchable()
+                    ->sortable(),
                 TextColumn::make('repeater_data.status')
-                    ->label('Status'),
+                    ->label('Status')
+                    ->searchable()
+                    ->sortable(),
             ])
+            
             ->actions([
                 Tables\Actions\EditAction::make(),
             ])
