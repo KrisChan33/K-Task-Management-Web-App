@@ -10,6 +10,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\SelectColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
@@ -28,11 +29,11 @@ class TaskResource extends Resource
                         Select::make('status')
                             ->label('Status')
                             ->options([
-                                'pending' => 'Pending',
-                                'in-progress' => 'In Progress',
-                                'completed' => 'Completed',
+                                'Pending' => 'Pending',
+                                'In Progress' => 'In Progress',
+                                'Completed' => 'Completed',
                             ])
-                            ->default('pending')
+                            ->default('Pending')
                             ->columnSpanFull()
                             ->required(),
                         TextInput::make('name')
@@ -64,6 +65,12 @@ class TaskResource extends Resource
                     ->sortable(),
                 TextColumn::make('repeater_data.status')
                     ->label('Status')
+                    ->badge()
+                    ->color(fn (string $state): string => match ($state) {
+                        'Pending' => 'warning',
+                        'In Progress' => 'info',
+                        'Completed' => 'success',
+                    })
                     ->searchable()
                     ->sortable(),
             ])

@@ -14,7 +14,6 @@ class Project extends Model
         'name', // name of the project
         'description',// description of the project
         'status', // status of the project
-        
         ];
 
           /**

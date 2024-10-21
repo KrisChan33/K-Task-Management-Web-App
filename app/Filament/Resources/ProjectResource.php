@@ -25,6 +25,7 @@ use Filament\Support\Enums\Alignment;
 use Filament\Support\Enums\MaxWidth;
 use Filament\Support\Markdown;
 use Filament\Tables;
+use Filament\Tables\Columns\SelectColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
@@ -112,9 +113,9 @@ class ProjectResource extends Resource
                 Select::make('status')
                     ->label('Status')
                     ->options([
-                        'pending' => 'Pending',
-                        'in-progress' => 'In Progress',
-                        'completed' => 'Completed',
+                        'Pending' => 'Pending',
+                        'In Progress' => 'In Progress',
+                        'Completed' => 'Completed',
                     ])
                     ->visibleOn('update')
                     ->nullable()
@@ -156,28 +157,36 @@ class ProjectResource extends Resource
                     ->label('Project Name')
                     ->icon('heroicon-o-user')
                     ->iconPosition('before')
+                    ->limit(25)
                     ->searchable()
                     ->iconColor('primary')
                     ->sortable('asc'),
                 TextColumn::make('description')
                     ->searchable()
                     ->sortable()
-                    ->limit(40)
+                    ->limit(30)
                     ->label('Description'),
                 TextColumn::make('status')
+                ->label('Status')
+                ->badge()
+                ->color(fn (string $state): string => match ($state) {
+                    'Not Started' => 'warning',
+                    'In Progress' => 'info',
+                    'Completed' => 'success',
+                })
+                ->searchable()
+                ->sortable(),
+                TextColumn::make('created_at')
                     ->searchable()
+                    ->limit(10)
                     ->sortable()
-                    ->label('Status'),
-                TextColumn::make('start_date')
+                    ->label('Created At'),
+                TextColumn::make('updated_at')
                     ->searchable()
-                    ->default(now())
+                    ->limit(10)
                     ->sortable()
-                    ->label('Start Date'),
-                TextColumn::make('end_date')
-                    ->searchable()
-                    ->sortable()
-                    ->label('End Date'),
-            ])
+                    ->label('Updated At'),
+                    ])
             ->filters([
                 //
             ])

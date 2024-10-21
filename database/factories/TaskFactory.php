@@ -21,7 +21,7 @@ class TaskFactory extends Factory
         return [
             'project_id' => $this->faker->randomElement([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]),
             'repeater_data' => [
-                'status' => $this->faker->randomElement(['pending', 'in-progress', 'completed']),
+                'status' => $this->faker->randomElement(['Pending', 'In Progress', 'Completed']),
                 'name' => $this->faker->sentence,
                 'description' => $this->faker->paragraph,
             ],
