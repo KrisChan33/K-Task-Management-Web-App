@@ -141,11 +141,6 @@ class ProjectResource extends Resource
                 ->maxItems(30)
                 ->label('Manage Tasks')
             ]),
-
-
-
-
-
             ]);
     }
     public static function table(Table $table): Table
@@ -176,16 +171,16 @@ class ProjectResource extends Resource
                 })
                 ->searchable()
                 ->sortable(),
-                TextColumn::make('created_at')
-                    ->searchable()
-                    ->limit(10)
-                    ->sortable()
-                    ->label('Created At'),
-                TextColumn::make('updated_at')
-                    ->searchable()
-                    ->limit(10)
-                    ->sortable()
-                    ->label('Updated At'),
+                // TextColumn::make('created_at')
+                //     ->searchable()
+                //     ->limit(10)
+                //     ->sortable()
+                //     ->label('Created At'),
+                // TextColumn::make('updated_at')
+                //     ->searchable()
+                //     ->limit(10)
+                //     ->sortable()
+                //     ->label('Updated At'),
                     ])
             ->filters([
                 //
