@@ -41,6 +41,7 @@ class DatabaseSeeder extends Seeder
         Project::factory(10)->create();
         Task::factory(10)->create();
 
+
           // Run the Artisan command with options and flags
     }
 }

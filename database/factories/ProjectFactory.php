@@ -20,8 +20,6 @@ class ProjectFactory extends Factory
             'name' => $this->faker->name(),
             'description' => $this->faker->text(),
             'status' => $this->faker->randomElement(['Completed', 'In Progress', 'Not Started']),
-            'start_date' => $this->faker->date(),
-            'end_date' => $this->faker->date(),
         ];
     }
 }

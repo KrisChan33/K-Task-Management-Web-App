@@ -14,20 +14,19 @@ class Project extends Model
         'name', // name of the project
         'description',// description of the project
         'status', // status of the project
-        // 'user_id'
-        'start_date',// start date of the project
-        'end_date', // end date of the project
+        
         ];
 
-        protected $casts = [
-            'start_date' => 'datetime',
-            'end_date' => 'datetime',
-        ];
-
-    public function tasks()
-    {
+          /**
+     * The attributes that should be cast.
+     *
+     * @var array<string, string>
+     */
+    protected $casts = [
+        'updated_at' => 'datetime',
+        'created_at' => 'datetime',
+];
+    public function tasks(){
         return $this->hasMany(Task::class);
     }
-
-    
 }

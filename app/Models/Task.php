@@ -5,28 +5,30 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Task extends Model
+class Task extends Model 
 {
     use HasFactory;
-    
+ /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+
     protected $fillable = [
         'id',
-        'project_id', // project id
-        'title', // name of the task
-        'description',// description of the task
-        'status', // status of the task
-        'start_date',// start date of the task
-        'end_date', // end date of the task
+        // 'name',
+        // 'description',
+        // 'status',
+       'repeater_data',
+        'project_id',
         ];
-
-
 
         protected $casts = [
-            'start_date' => 'datetime',
-            'end_date' => 'datetime',
+
+            'repeater_data' => 'json',
+           
         ];
-
-
+        
     public function project(){
         return $this->belongsTo(Project::class);
     }

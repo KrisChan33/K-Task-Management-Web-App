@@ -1,24 +1,20 @@
 <?php
-namespace App\Filament\Resources;
+namespace App\Filament\Resources\ProjectResource\RelationManagers;
 
-use App\Filament\Resources\TaskResource\Pages;
-use App\Models\Task;
 use Filament\Forms;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
-use Filament\Resources\Resource;
+use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
-use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
-class TaskResource extends Resource
+class TasksRelationManager extends RelationManager
 {
-    protected static ?string $model = Task::class;
-    protected static ?string $navigationGroup = 'Project Management';
+    protected static string $relationship = 'tasks';
 
-    public static function form(Form $form): Form
+    public function form(Form $form): Form
     {
         return $form
             ->schema([
@@ -47,36 +43,26 @@ class TaskResource extends Resource
             ]);
     }
 
-    public static function table(Table $table): Table
+    public function table(Table $table): Table
     {
         return $table
             ->columns([
-                TextColumn::make('repeater_data.name')
+                Tables\Columns\TextColumn::make('repeater_data.name')
                     ->label('Task Name'),
-                TextColumn::make('repeater_data.description')
+                Tables\Columns\TextColumn::make('repeater_data.description')
                     ->label('Description'),
-                TextColumn::make('repeater_data.status')
+                Tables\Columns\TextColumn::make('repeater_data.status')
                     ->label('Status'),
+            ])
+            ->headerActions([
+                Tables\Actions\CreateAction::make(),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
-    }
-
-    public static function getRelations(): array
-    {
-        return [];
-    }
-
-    public static function getPages(): array
-    {
-        return [
-            'index' => Pages\ListTasks::route('/'),
-            'create' => Pages\CreateTask::route('/create'),
-            'edit' => Pages\EditTask::route('/{record}/edit'),
-        ];
     }
 }

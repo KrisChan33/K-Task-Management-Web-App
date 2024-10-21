@@ -3,8 +3,10 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\ProjectResource\Pages;
-use App\Filament\Resources\ProjectResource\RelationManagers;
+use App\Filament\Resources\ProjectResource\RelationManagers\TasksRelationManager;
 use App\Models\Project;
+use App\Models\Task;
+use Faker\Provider\ar_EG\Text;
 use Filament\Forms;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Fieldset;
@@ -41,17 +43,15 @@ class ProjectResource extends Resource
     public static function form(Form $form): Form
     {
         return $form
-        
         ->schema([
             Split::make([
-            Section::make('Create New Project')->description('Fill out the form below to create a new project. Provide the project name and other necessary details to get started.')
+            Section::make('Project Form')->description('Fill out the form below to create a new project. Provide the project name and other necessary details to get started.')
                 ->schema([
                     TextInput::make('name')
-                        ->label('Name')
+                        ->label('Project Name')
                         ->hintIcon('heroicon-m-question-mark-circle', tooltip: 'Enter the name of the project.')
                         ->columnSpan(8)
                         ->required(),
-                    
                         Select::make('status')
                         ->label('Status')
                         ->options([
@@ -63,7 +63,6 @@ class ProjectResource extends Resource
                         ->columnSpan(4)
                         ->default('not-started')
                         ->required(),
-            
                     Textarea::make('description')
                         ->label('Description')
                         ->columnSpanFull()
@@ -75,34 +74,20 @@ class ProjectResource extends Resource
                         ->maxLength(1024)
                         ->hintIcon('heroicon-m-question-mark-circle', tooltip: 'Provide a detailed description of the project. The description should be between 2 and 1024 characters.')
                         ->required(),
-
-                        DatePicker::make('start_date')
-                        ->label('Start Date')
-                        ->columnSpan(6)
-                        ->hintIcon('heroicon-m-question-mark-circle', tooltip: 'Select the start date of the project.')
-                        ->required(),
-                        
-                        DatePicker::make('end_date')
-                        ->label('End Date')
-                        ->columnSpan(6)
-                        ->hintIcon('heroicon-m-question-mark-circle', tooltip: 'Select the end date of the project.')
-                        ->required(),
             ])->columns(12)->columnSpanFull(),
-
             Fieldset::make('Metadata')->schema([
-                                Placeholder::make('start_date')
-                                ->content(fn (?Project $record): string => optional($record)->start_date?->toFormattedDateString() ?? 'N/A'),
+                                // Placeholder::make('start_date')
+                                // ->content(fn (?Project $record): string => optional($record)->start_date?->toFormattedDateString() ?? 'N/A'),
                                 
-                                Placeholder::make('end_date')
-                                ->content(fn (?Project $record): string => optional($record)->start_date?->toFormattedDateString() ?? 'N/A'),
-
+                                // Placeholder::make('end_date')
+                                // ->content(fn (?Project $record): string => optional($record)->end_date?->toFormattedDateString() ?? 'N/A'),
+                        
                                 Placeholder::make('created_at')
                                 ->content(fn (?Project $record): string => optional($record)->created_at?->toFormattedDateString() ?? 'N/A'),
 
                                 Placeholder::make('updated_at')
                                 ->content(fn (?Project $record): string => optional($record)->updated_at?->toFormattedDateString() ?? 'N/A'),
                             ])->grow(false)->columnSpan(12),
-
         ])->from('sm')->columns(
             [
                 'sm' => 3,
@@ -111,7 +96,6 @@ class ProjectResource extends Resource
                 '2xl' => 12,
             ]
 
-
         )->columnSpanFull()
 
             ]);
@@ -119,9 +103,10 @@ class ProjectResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+        // ->query(fn () => Project::query()->where('id', auth()->id()?? 'No Record')) // Filter tasks by the logged-in user's ID
             ->columns([
                 TextColumn::make('name')
-                    ->label('Name')
+                    ->label('Project Name')
                     ->icon('heroicon-o-user')
                     ->iconPosition('before')
                     ->searchable()
@@ -138,6 +123,7 @@ class ProjectResource extends Resource
                     ->label('Status'),
                 TextColumn::make('start_date')
                     ->searchable()
+                    ->default(now())
                     ->sortable()
                     ->label('Start Date'),
                 TextColumn::make('end_date')
@@ -161,7 +147,7 @@ class ProjectResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            TasksRelationManager::class,
         ];
     }
 
@@ -173,4 +159,6 @@ class ProjectResource extends Resource
             'edit' => Pages\EditProject::route('/{record}/edit'),
         ];
     }
+
+
 }

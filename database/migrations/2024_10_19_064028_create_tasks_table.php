@@ -13,12 +13,11 @@ return new class extends Migration
     {
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('project_id')->constrained()->onDelete('cascade')->nullable();
-            $table->string('title');
-            $table->text('description');
-            $table->string('status');
-            $table->timestamp('start_date');
-            $table->timestamp('end_date');
+            $table->foreignId('project_id')->constraint()->cascadeOnDelete()->cascadeOnUpdate();
+            $table->json('repeater_data');
+            // $table->string('name');
+            // $table->text('description');
+            // $table->string('status');
             $table->timestamps();
         });
     }
@@ -26,6 +25,7 @@ return new class extends Migration
     /**
      * Reverse the migrations.
      */
+
     public function down(): void
     {
         Schema::dropIfExists('tasks');
