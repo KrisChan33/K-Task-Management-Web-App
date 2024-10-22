@@ -1,27 +1,37 @@
 <?php
-namespace App\Filament\Resources\ProjectResource\RelationManagers;
 
+namespace App\Filament\Resources;
+
+use App\Filament\Resources\MyTaskResource\Pages;
+use App\Filament\Resources\MyTaskResource\RelationManagers;
+use App\Models\MyTask;
 use App\Models\Task;
 use Filament\Forms;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
-use Filament\Resources\RelationManagers\RelationManager;
+use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Facades\Auth;
 
-class TasksRelationManager extends RelationManager
+class MyTaskResource extends Resource
 {
-    protected static string $relationship = 'tasks';
+    protected static ?string $model = Task::class;
+    protected static ?string $navigationParentItem = 'My Projects';
 
-    public function form(Form $form): Form
+    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationGroup = 'Project Management';
+    protected static ?string $label = 'My Tasks';
+
+    public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                
                 Repeater::make('repeater_data')
                     ->schema([
                         Select::make('status')
@@ -31,7 +41,6 @@ class TasksRelationManager extends RelationManager
                                 'In Progress' => 'In Progress',
                                 'Completed' => 'Completed',
                             ])
-                            ->visibleOn('update')
                             ->default('Pending')
                             ->columnSpanFull()
                             ->required(),
@@ -44,55 +53,61 @@ class TasksRelationManager extends RelationManager
                             ->columnSpanFull()
                             ->required(),
                     ])
-                ->defaultItems(0)
-                ->reorderableWithButtons()
-                ->collapsible()
-                ->cloneable()
-                ->orderColumn('sort')
-                ->minItems(0)
-                ->maxItems(30)
-                ->columnSpanFull()
-                ->label('Manage Tasks'),
-
-                //
-            ])->columns(2);
+                    ->columnSpanFull()
+                    ,
+            ]);
     }
 
-    public function table(Table $table): Table
+    public static function table(Table $table): Table
     {
         return $table
+            ->uq
             ->columns([
-                TextColumn::make('project.name')
+                TextColumn::make('name')
                     ->label('Task Name')
+                    ->limit(25)
                     ->searchable()
                     ->sortable()
                     ->wrap(),
-                TextColumn::make('project.description')
-                    ->label('Description'),
-                TextColumn::make('project.status')
-                    ->label('Status'),
-                TextColumn::make('project.status')
+                TextColumn::make('description')
+                    ->label('Description')
+                    ->limit(30)
+                    ->searchable()
+                    ->sortable(),
+                TextColumn::make('status')
                     ->label('Status')
                     ->badge()
                     ->color(fn (string $state): string => match ($state) {
                         'Pending' => 'warning',
                         'In Progress' => 'info',
                         'Completed' => 'success',
-                        'Not Started' => 'danger', // Add this line to handle 'Not Started' case
-                         default => 'danger', 
+                       
                     })
                     ->searchable()
                     ->sortable(),
             ])
-            ->headerActions([
-                Tables\Actions\CreateAction::make(),
-            ])
+            
             ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                // Tables\Actions\EditAction::make(),
+                // Tables\Actions\CreateAction::make(),
+
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
+    }
+
+    public static function getRelations(): array
+    {
+        return [];
+    }
+
+    public static function getPages(): array
+    {
+        return [
+            'index' => Pages\ListMyTasks::route('/'),
+            'create' => Pages\CreateMyTask::route('/create'),
+            'edit' => Pages\EditMyTask::route('/{record}/edit'),
+        ];
     }
 }

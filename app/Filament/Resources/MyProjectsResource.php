@@ -2,16 +2,13 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\ProjectResource\Pages;
+use App\Filament\Resources\MyProjectsResource\Pages;
+use App\Filament\Resources\MyProjectsResource\RelationManagers;
 use App\Filament\Resources\ProjectResource\RelationManagers\TasksRelationManager;
+use App\Models\MyProjects;
 use App\Models\Project;
-use App\Models\Task;
-use Faker\Provider\ar_EG\Text;
 use Filament\Forms;
-use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Fieldset;
-use Filament\Forms\Components\Grid;
-use Filament\Forms\Components\MarkdownEditor;
 use Filament\Forms\Components\Placeholder;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Section;
@@ -21,27 +18,23 @@ use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Support\Enums\Alignment;
-use Filament\Support\Enums\MaxWidth;
-use Filament\Support\Markdown;
 use Filament\Tables;
-use Filament\Tables\Columns\SelectColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Illuminate\Database\Console\Migrations\StatusCommand;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Date;
 
-use function Laravel\Prompts\text;
-
-class ProjectResource extends Resource
+class MyProjectsResource extends Resource
 {
     protected static ?string $model = Project::class;
+
+    protected static string $icon = 'heroicon-o-rectangle-stack';
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $label = 'My Projects';
     protected static ?string $navigationGroup = 'Project Management';
-    protected static ?string $label = 'All Projects';
-    
+
     public static function form(Form $form): Form
     {
         return $form
@@ -100,6 +93,7 @@ class ProjectResource extends Resource
 
         )->columnSpanFull(),
 
+
         //for Task
         Section::make('Tasks')
         ->description('Fill out the form below to create a new task. Provide the task name and other necessary details to get started.')
@@ -128,10 +122,9 @@ class ProjectResource extends Resource
                     ->required(),
             ])
                 ->columns(2)
-                ->defaultItems(30)
                 ->reorderableWithButtons()
-                ->defaultItems(0)
                 ->collapsible()
+                ->defaultItems(0)
                 ->cloneable()
                 ->grid(2)
                 ->orderColumn('sort')
@@ -139,14 +132,14 @@ class ProjectResource extends Resource
                 ->maxItems(30)
                 ->label('Manage Tasks')
             ])->visibleOn('create'),
-
-
-
+            
             ]);
     }
     public static function table(Table $table): Table
     {
         return $table
+        ->query(fn () => Project::query()->where('user_id', Auth::id())) // Filter projects by the logged-in user's ID   
+      
         ->columns([
                 TextColumn::make('name')
                     ->label('Project Name')
@@ -205,9 +198,9 @@ class ProjectResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListProjects::route('/'),
-            'create' => Pages\CreateProject::route('/create'),
-            'edit' => Pages\EditProject::route('/{record}/edit'),
+            'index' => Pages\ListMyProjects::route('/'),
+            'create' => Pages\CreateMyProjects::route('/create'),
+            'edit' => Pages\EditMyProjects::route('/{record}/edit'),
         ];
     }
 

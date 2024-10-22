@@ -18,8 +18,9 @@ class TaskResource extends Resource
 {
     protected static ?string $model = Task::class;
     protected static ?string $navigationGroup = 'Project Management';
-
+    protected static ?string $label = 'All Task';
     public static function form(Form $form): Form
+    
     {
         return $form
             ->schema([

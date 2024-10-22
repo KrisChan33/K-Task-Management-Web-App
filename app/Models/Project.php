@@ -12,6 +12,7 @@ class Project extends Model
     protected $fillable = [
         'id',
         'name', // name of the project
+        'user_id',
         'description',// description of the project
         'status', // status of the project
         ];
@@ -28,4 +29,9 @@ class Project extends Model
     public function tasks(){
         return $this->hasMany(Task::class);
     }
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
+
 }

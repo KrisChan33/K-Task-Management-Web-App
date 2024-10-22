@@ -27,7 +27,6 @@ class DatabaseSeeder extends Seeder
             'password' => '123',
             'remember_token' => '0000000000000000000',
         ]);
-
         User::factory()->create([
             'id' => 2,
             'name'=> 'Student Full Name',
@@ -40,8 +39,6 @@ class DatabaseSeeder extends Seeder
         User::factory(10)->create();
         Project::factory(10)->create();
         Task::factory(10)->create();
-
-
           // Run the Artisan command with options and flags
     }
 }
