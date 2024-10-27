@@ -11,22 +11,19 @@ class Task extends Model
  /**
      * The attributes that are mass assignable.
      *
-     * @var array<int, string>
+     * @var array<int, string>t
      */
 
     protected $fillable = [
-        'id',
-        // 'name',
-        // 'description',
-        // 'status',
-       'repeater_data',
+        'name',
+        'description',
+        'status',
+        'repeater_data',
         'project_id',
         ];
 
         protected $casts = [
-
-            'repeater_data' => 'json',
-           
+            'repeater_data' => 'array',
         ];
         
     public function project(){

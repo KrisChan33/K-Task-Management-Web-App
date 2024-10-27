@@ -25,7 +25,6 @@ class User extends Authenticatable implements FilamentUser, HasAvatar//, MustVer
      * @var array<int, string>
      */
     protected $fillable = [
-        'id',
         'name',
         'email',
         'avatar_url',
@@ -58,8 +57,7 @@ class User extends Authenticatable implements FilamentUser, HasAvatar//, MustVer
         return $this->avatar_url ? Storage::url("$this->avatar_url") : null;
     }
 
-
-    public function projects()
+    public function project()
     {
         return $this->hasMany(Project::class);
     }

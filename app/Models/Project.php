@@ -4,15 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Project extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'id',
         'name', // name of the project
-        'user_id',
+        'user_id', // user id of the project
         'description',// description of the project
         'status', // status of the project
         ];
@@ -26,6 +26,15 @@ class Project extends Model
         'updated_at' => 'datetime',
         'created_at' => 'datetime',
 ];
+
+
+protected static function booted()
+{
+    static::creating(function ($project) {
+        $project->user_id = Auth::id();
+    });
+}
+
     public function tasks(){
         return $this->hasMany(Task::class);
     }

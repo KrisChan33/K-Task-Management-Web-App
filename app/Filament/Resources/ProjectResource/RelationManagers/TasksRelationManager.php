@@ -1,8 +1,11 @@
 <?php
 namespace App\Filament\Resources\ProjectResource\RelationManagers;
 
+use App\Models\Project;
 use App\Models\Task;
+use App\Models\User;
 use Filament\Forms;
+use Filament\Forms\Components\Builder;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
@@ -21,7 +24,6 @@ class TasksRelationManager extends RelationManager
     {
         return $form
             ->schema([
-                
                 Repeater::make('repeater_data')
                     ->schema([
                         Select::make('status')
@@ -53,7 +55,6 @@ class TasksRelationManager extends RelationManager
                 ->maxItems(30)
                 ->columnSpanFull()
                 ->label('Manage Tasks'),
-
                 //
             ])->columns(2);
     }
@@ -61,29 +62,31 @@ class TasksRelationManager extends RelationManager
     public function table(Table $table): Table
     {
         return $table
-            ->columns([
-                TextColumn::make('project.name')
-                    ->label('Task Name')
-                    ->searchable()
-                    ->sortable()
-                    ->wrap(),
-                TextColumn::make('project.description')
-                    ->label('Description'),
-                TextColumn::make('project.status')
-                    ->label('Status'),
-                TextColumn::make('project.status')
-                    ->label('Status')
-                    ->badge()
-                    ->color(fn (string $state): string => match ($state) {
-                        'Pending' => 'warning',
-                        'In Progress' => 'info',
-                        'Completed' => 'success',
-                        'Not Started' => 'danger', // Add this line to handle 'Not Started' case
-                         default => 'danger', 
-                    })
-                    ->searchable()
-                    ->sortable(),
-            ])
+        ->query(fn () => Task::whereHas('project', function ($query) {
+            $query->where('user_id', Auth::id());
+        }))
+        ->columns([
+            TextColumn::make('repeater_data.name')
+            ->label('Task Name')
+            ->limit(25)
+            ->searchable()
+            ->sortable(),
+        TextColumn::make('repeater_data.description')
+            ->label('Description')
+            ->limit(30)
+            ->searchable()
+            ->sortable(),
+        TextColumn::make('repeater_data.status')
+            ->label('repeater_data.Status')
+            ->badge()
+            ->color(fn (string $state): string => match ($state) {
+                'Pending' => 'warning',
+                'In Progress' => 'info',
+                'Completed' => 'success',
+            })
+            ->searchable()
+            ->sortable(),
+        ])
             ->headerActions([
                 Tables\Actions\CreateAction::make(),
             ])

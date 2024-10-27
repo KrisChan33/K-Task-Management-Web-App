@@ -138,7 +138,7 @@ class MyProjectsResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
-        ->query(fn () => Project::query()->where('user_id', Auth::id())) // Filter projects by the logged-in user's ID   
+        // ->query(fn () => Project::query()->where('user_id', Auth::id())) // Filter projects by the logged-in user's ID   
       
         ->columns([
                 TextColumn::make('name')

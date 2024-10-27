@@ -23,30 +23,31 @@ class TaskResource extends Resource
     
     {
         return $form
-            ->schema([
-                Repeater::make('repeater_data')
-                    ->columns(2)
-                    ->schema([
-                        Select::make('status')
-                            ->label('Status')
-                            ->options([
-                                'Pending' => 'Pending',
-                                'In Progress' => 'In Progress',
-                                'Completed' => 'Completed',
-                            ])
-                            ->default('Pending')
-                            ->columnSpanFull()
-                            ->required(),
-                        TextInput::make('name')
-                            ->label('Task Name')
-                            ->columnSpanFull()
-                            ->required(),
-                        TextInput::make('description')
-                            ->label('Description')
-                            ->columnSpanFull()
-                            ->required(),
-                    ]),
-            ]);
+        ->schema([
+            Repeater::make('repeater_data')
+                ->columns(2)
+                ->schema([
+                    Select::make('status')
+                        ->label('Status')
+                        ->options([
+                            'Pending' => 'Pending',
+                            'In Progress' => 'In Progress',
+                            'Completed' => 'Completed',
+                        ])
+                        ->default('Pending')
+                        ->columnSpanFull()
+                        ->required(),
+                    TextInput::make('name')
+                        ->label('Task Name')
+                        ->columnSpanFull()
+                        ->required(),
+                    TextInput::make('description')
+                        ->label('Description')
+                        ->columnSpanFull()
+                        ->required(),
+                ])
+                ->columnSpanFull(),
+        ]);
     }
 
     public static function table(Table $table): Table

@@ -47,8 +47,9 @@ class ProjectResource extends Resource
         return $form
         ->schema([
             Split::make([
-            Section::make('Project Form')->description('Fill out the form below to create a new project. Provide the project name and other necessary details to get started.')
-                ->schema([
+            Section::make('Project Details')->description('Fill out the form below to create a new project. Provide the project name and other necessary details to get started.')
+                // ->label('Project Details')
+            ->schema([
                     TextInput::make('name')
                         ->label('Project Name')
                         ->hintIcon('heroicon-m-question-mark-circle', tooltip: 'Enter the name of the project.')
@@ -139,8 +140,6 @@ class ProjectResource extends Resource
                 ->maxItems(30)
                 ->label('Manage Tasks')
             ])->visibleOn('create'),
-
-
 
             ]);
     }

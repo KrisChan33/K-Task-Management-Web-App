@@ -61,35 +61,33 @@ class MyTaskResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
-            ->uq
             ->columns([
-                TextColumn::make('name')
+                TextColumn::make('repeater_data.name')
                     ->label('Task Name')
                     ->limit(25)
                     ->searchable()
                     ->sortable()
                     ->wrap(),
-                TextColumn::make('description')
+                TextColumn::make('repeater_data.description')
                     ->label('Description')
                     ->limit(30)
                     ->searchable()
                     ->sortable(),
-                TextColumn::make('status')
+                TextColumn::make('repeater_data.status')
                     ->label('Status')
                     ->badge()
                     ->color(fn (string $state): string => match ($state) {
                         'Pending' => 'warning',
                         'In Progress' => 'info',
                         'Completed' => 'success',
-                       
                     })
                     ->searchable()
                     ->sortable(),
             ])
             
             ->actions([
-                // Tables\Actions\EditAction::make(),
-                // Tables\Actions\CreateAction::make(),
+                Tables\Actions\EditAction::make(),
+                Tables\Actions\CreateAction::make(),
 
             ])
             ->bulkActions([
