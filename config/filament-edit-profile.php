@@ -4,6 +4,58 @@ return [
 'show_custom_fields' => true,
 
     'custom_fields' => [
+        'First Name' => [
+            'type' => 'text',
+            'label' => 'First Name',
+            'placeholder' => '',
+            'required' => true,
+            'rules' => 'required|string|max:255',
+        ],
+        'Middle Initial' => [
+            'type' => 'password',
+            'label' => 'Middile Initial',
+            'placeholder' => '',
+            'required' => true,
+            'rules' => 'required|string|max:255',
+        ],
+        'Last Name' => [
+            'type' => 'password',
+            'label' => 'Last Name',
+            'placeholder' => '',
+            'required' => true,
+            'rules' => 'required|string|max:255',
+        ],
+        'Gender' => [
+            'type' => 'select',
+            'label' => 'Gender',
+            'placeholder' => 'Select',
+            'required' => true,
+            'options' => [
+                'Male' => 'Male',
+                'Female' => 'Female',
+            ],
+        ],
+        'About Your Self' => [
+            'type' =>'textarea',
+            'label' => 'About Your Self',
+            'placeholder' => '',
+            'rows' => '3',
+            'required' => true,
+        ],
+        'Date of Birth' => [
+            'type' => 'datetime',
+            'placeholder' => '',
+            'label' => 'Date of Birth',
+            'seconds' => false,
+        ],
+        'Agree in Confidentiality' => [
+            'type' => 'boolean',
+            'placeholder' => '',
+            'label' => 'Agree in Confidentiality',
+        ],
+
+
+
         'github' => [
             'type' => 'text',
             'label' => 'Github Account',
@@ -17,15 +69,6 @@ return [
             'rules' => 'nullable|string|max:255',
        ],
 
-        'Itch.io' => [
-            'type' => 'text',
-            'label' => 'Itch.io Account',
-            'placeholder' => 'Itch.io Username',
-            'required' => false,
-            'columnspan' => 4,
-            'rules' => 'nullable|string|max:255',
-       ],
-
         'linkedin' => [
             'type' => 'text',
             'label' => 'LinkedIn Account',
@@ -34,6 +77,7 @@ return [
             'columnspan' => 4,
             'rules' => 'nullable|string|max:255',
        ],
+       
        'facebook' => [
         'type' => 'text',
         'label' => 'Facebook Account',
