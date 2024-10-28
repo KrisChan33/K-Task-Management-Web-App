@@ -13,11 +13,10 @@ return new class extends Migration
     {
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('project_id')->constraint()->cascadeOnDelete()->cascadeOnUpdate();
-            $table->json('repeater_data');
-            // $table->string('name');
-            // $table->text('description');
-            // $table->string('status');
+            $table->foreignId('project_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+            $table->string('name');
+            $table->text('description');
+            $table->string('status')->default('Pending');
             $table->timestamps();
         });
     }

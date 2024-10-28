@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Task extends Model 
 {
@@ -16,16 +17,18 @@ class Task extends Model
 
     protected $fillable = [
         'name',
+        'project_id',
         'description',
         'status',
-        'repeater_data',
-        'project_id',
-        ];
-
-        protected $casts = [
-            'repeater_data' => 'array',
         ];
         
+        // protected static function booted()
+        // {
+        //     static::creating(function ($task) {
+        //         $task->project_id = Auth::id();
+        //     });
+        // }
+
     public function project(){
         return $this->belongsTo(Project::class);
     }

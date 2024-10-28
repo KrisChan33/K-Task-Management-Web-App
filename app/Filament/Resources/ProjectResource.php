@@ -6,6 +6,7 @@ use App\Filament\Resources\ProjectResource\Pages;
 use App\Filament\Resources\ProjectResource\RelationManagers\TasksRelationManager;
 use App\Models\Project;
 use App\Models\Task;
+use App\Models\User;
 use Faker\Provider\ar_EG\Text;
 use Filament\Forms;
 use Filament\Forms\Components\DatePicker;
@@ -79,17 +80,16 @@ class ProjectResource extends Resource
                         ->required(),
             ])->columns(12)->columnSpanFull(),
             Fieldset::make('Metadata')->schema([
-                                // Placeholder::make('start_date')
-                                // ->content(fn (?Project $record): string => optional($record)->start_date?->toFormattedDateString() ?? 'N/A'),
-                                
-                                // Placeholder::make('end_date')
-                                // ->content(fn (?Project $record): string => optional($record)->end_date?->toFormattedDateString() ?? 'N/A'),
-                        
+                                Placeholder::make('user_id')
+                                    ->label('User ID')
+                                    ->content(fn ($record) => $record->user_id),
+                                Placeholder::make('user.name')
+                                    ->label('Created By')
+                                    ->content(fn ($record) => $record->user->name),
                                 Placeholder::make('created_at')
-                                ->content(fn (?Project $record): string => optional($record)->created_at?->toFormattedDateString() ?? 'N/A'),
-
+                                    ->content(fn (?Project $record): string => optional($record)->created_at?->toFormattedDateString() ?? 'N/A'),
                                 Placeholder::make('updated_at')
-                                ->content(fn (?Project $record): string => optional($record)->updated_at?->toFormattedDateString() ?? 'N/A'),
+                                    ->content(fn (?Project $record): string => optional($record)->updated_at?->toFormattedDateString() ?? 'N/A'),
                             ])->grow(false)->columnSpan(12),
         ])->from('sm')->columns(
             [
@@ -100,47 +100,37 @@ class ProjectResource extends Resource
             ]
 
         )->columnSpanFull(),
-
-        //for Task
-        Section::make('Tasks')
-        ->description('Fill out the form below to create a new task. Provide the task name and other necessary details to get started.')
-        ->schema([
-            Repeater::make('repeater_data')
-            ->columns(2)
-            ->schema([
-                Select::make('status')
-                    ->label('Status')
-                    ->options([
-                        'Not Started' => 'Not Started',
-                        'In Progress' => 'In Progress',
-                        'Completed' => 'Completed',
-                    ])
-                    ->visibleOn('update')
-                    ->nullable()
-                    ->columnSpanFull()
-                    ->required(),
-                TextInput::make('name')
-                    ->label('Task Name')
-                    ->columnSpanFull()
-                    ->required(),
-                TextInput::make('description')
-                    ->label('Description')
-                    ->columnSpanFull()
-                    ->required(),
-            ])
-                ->columns(2)
-                ->defaultItems(30)
-                ->reorderableWithButtons()
-                ->defaultItems(0)
-                ->collapsible()
-                ->cloneable()
-                ->grid(2)
-                ->orderColumn('sort')
-                ->minItems(0)
-                ->maxItems(30)
-                ->label('Manage Tasks')
-            ])->visibleOn('create'),
-
+      
+      
+        // //for Task
+        // Section::make('Tasks')
+        // ->description('Fill out the form below to create a new task. Provide the task name and other necessary details to get started.')
+        // ->schema([
+        //     Repeater::make('repeater_data')
+        //     ->columns(2)
+        //     ->schema([
+        //         Select::make('status')
+        //             ->label('Status')
+        //             ->options([
+        //                 'Not Started' => 'Not Started',
+        //                 'In Progress' => 'In Progress',
+        //                 'Completed' => 'Completed',
+        //             ])
+        //             ->visibleOn('update')
+        //             ->nullable()
+        //             ->columnSpanFull()
+        //             ->required(),
+        //         TextInput::make('name')
+        //             ->label('Task Name')
+        //             ->columnSpanFull()
+        //             ->required(),
+        //         TextInput::make('description')
+        //             ->label('Description')
+        //             ->columnSpanFull()
+        //             ->required(),
+        //     ])
+        //         ->columns(2)
+        //     ])->visibleOn('create'),
             ]);
     }
     public static function table(Table $table): Table

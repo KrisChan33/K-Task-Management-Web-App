@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -18,6 +19,7 @@ class ProjectFactory extends Factory
     {
         return [
             'name' => $this->faker->name(),
+            'user_id' => $this->faker->randomElement(User::pluck('id')->toArray()),
             'description' => $this->faker->text(),
             'status' => $this->faker->randomElement(['Completed', 'In Progress', 'Not Started']),
         ];

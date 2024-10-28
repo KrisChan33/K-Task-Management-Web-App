@@ -83,8 +83,6 @@ class AdminPanelProvider extends PanelProvider
                 Authenticate::class,
             ])->plugins([
                FilamentShieldPlugin::make(),
-
-
                FilamentEditProfilePlugin::make()
                     ->slug('My Profile')
                     ->setTitle('My Profile')

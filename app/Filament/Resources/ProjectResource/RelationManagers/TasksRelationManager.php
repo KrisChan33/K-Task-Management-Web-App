@@ -3,11 +3,9 @@ namespace App\Filament\Resources\ProjectResource\RelationManagers;
 
 use App\Models\Project;
 use App\Models\Task;
-use App\Models\User;
-use Filament\Forms;
-use Filament\Forms\Components\Builder;
-use Filament\Forms\Components\Repeater;
+use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
@@ -24,8 +22,12 @@ class TasksRelationManager extends RelationManager
     {
         return $form
             ->schema([
-                Repeater::make('repeater_data')
+                Section::make('project_id')
                     ->schema([
+                        TextInput::make('name')
+                            ->label('Task Name')
+                            ->columnSpan(6)
+                            ->required(),
                         Select::make('status')
                             ->label('Status')
                             ->options([
@@ -33,51 +35,41 @@ class TasksRelationManager extends RelationManager
                                 'In Progress' => 'In Progress',
                                 'Completed' => 'Completed',
                             ])
-                            ->visibleOn('update')
+                            ->columnSpan(6)
                             ->default('Pending')
-                            ->columnSpanFull()
                             ->required(),
-                        TextInput::make('name')
-                            ->label('Task Name')
-                            ->columnSpanFull()
-                            ->required(),
-                        TextInput::make('description')
+                        Textarea::make('description')
                             ->label('Description')
-                            ->columnSpanFull()
+                            ->rows(10)
+                            ->cols(20)
+                            ->columnSpan(12)
+                            ->minLength(2)
+                            ->maxLength(1024)
                             ->required(),
-                    ])
-                ->defaultItems(0)
-                ->reorderableWithButtons()
-                ->collapsible()
-                ->cloneable()
-                ->orderColumn('sort')
-                ->minItems(0)
-                ->maxItems(30)
-                ->columnSpanFull()
-                ->label('Manage Tasks'),
+                    ])->columnSpanFull()->columnSpan(12)
                 //
-            ])->columns(2);
+            ]);
     }
 
     public function table(Table $table): Table
     {
         return $table
-        ->query(fn () => Task::whereHas('project', function ($query) {
-            $query->where('user_id', Auth::id());
-        }))
+        ->modifyQueryUsing(function ($query) {
+            return $query->where('project_id', $this->ownerRecord->id);
+        })
         ->columns([
-            TextColumn::make('repeater_data.name')
+            TextColumn::make('name')
             ->label('Task Name')
             ->limit(25)
             ->searchable()
             ->sortable(),
-        TextColumn::make('repeater_data.description')
+        TextColumn::make('description')
             ->label('Description')
             ->limit(30)
             ->searchable()
             ->sortable(),
-        TextColumn::make('repeater_data.status')
-            ->label('repeater_data.Status')
+        TextColumn::make('status')
+            ->label('Status')
             ->badge()
             ->color(fn (string $state): string => match ($state) {
                 'Pending' => 'warning',
@@ -86,7 +78,9 @@ class TasksRelationManager extends RelationManager
             })
             ->searchable()
             ->sortable(),
-        ])
+        ])->description('Tasks belonging to this project')
+
+        
             ->headerActions([
                 Tables\Actions\CreateAction::make(),
             ])
@@ -98,4 +92,5 @@ class TasksRelationManager extends RelationManager
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
+
 }

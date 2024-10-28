@@ -37,7 +37,7 @@ class DatabaseSeeder extends Seeder
             'remember_token' => '0000000000000000000',
         ]);
         User::factory(10)->create();
-        // Project::factory(10)->create();
+        Project::factory(10)->create();
         Task::factory(10)->create();
           // Run the Artisan command with options and flags
     }

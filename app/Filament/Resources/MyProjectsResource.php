@@ -94,52 +94,51 @@ class MyProjectsResource extends Resource
         )->columnSpanFull(),
 
 
-        //for Task
-        Section::make('Tasks')
-        ->description('Fill out the form below to create a new task. Provide the task name and other necessary details to get started.')
-        ->schema([
-            Repeater::make('repeater_data')
-            ->columns(2)
-            ->schema([
-                Select::make('status')
-                    ->label('Status')
-                    ->options([
-                        'Not Started' => 'Not Started',
-                        'In Progress' => 'In Progress',
-                        'Completed' => 'Completed',
-                    ])
-                    ->visibleOn('update')
-                    ->nullable()
-                    ->columnSpanFull()
-                    ->required(),
-                TextInput::make('name')
-                    ->label('Task Name')
-                    ->columnSpanFull()
-                    ->required(),
-                TextInput::make('description')
-                    ->label('Description')
-                    ->columnSpanFull()
-                    ->required(),
-            ])
-                ->columns(2)
-                ->reorderableWithButtons()
-                ->collapsible()
-                ->defaultItems(0)
-                ->cloneable()
-                ->grid(2)
-                ->orderColumn('sort')
-                ->minItems(0)
-                ->maxItems(30)
-                ->label('Manage Tasks')
-            ])->visibleOn('create'),
+        // //for Task
+        // Section::make('Tasks')
+        // ->description('Fill out the form below to create a new task. Provide the task name and other necessary details to get started.')
+        // ->schema([
+        //     Repeater::make('repeater_data')
+        //     ->columns(2)
+        //     ->schema([
+        //         Select::make('status')
+        //             ->label('Status')
+        //             ->options([
+        //                 'Not Started' => 'Not Started',
+        //                 'In Progress' => 'In Progress',
+        //                 'Completed' => 'Completed',
+        //             ])
+        //             ->visibleOn('update')
+        //             ->nullable()
+        //             ->columnSpanFull()
+        //             ->required(),
+        //         TextInput::make('name')
+        //             ->label('Task Name')
+        //             ->columnSpanFull()
+        //             ->required(),
+        //         TextInput::make('description')
+        //             ->label('Description')
+        //             ->columnSpanFull()
+        //             ->required(),
+        //     ])
+        //         ->columns(2)
+        //         ->reorderableWithButtons()
+        //         ->collapsible()
+        //         ->defaultItems(0)
+        //         ->cloneable()
+        //         ->grid(2)
+        //         ->orderColumn('sort')
+        //         ->minItems(0)
+        //         ->maxItems(30)
+        //         ->label('Manage Tasks')
+        //     ])->visibleOn('create'),
             
             ]);
     }
     public static function table(Table $table): Table
     {
         return $table
-        // ->query(fn () => Project::query()->where('user_id', Auth::id())) // Filter projects by the logged-in user's ID   
-      
+        ->query(fn () => Project::query()->where('user_id', Auth::id())) // Filter projects by the logged-in user's ID   
         ->columns([
                 TextColumn::make('name')
                     ->label('Project Name')
@@ -180,7 +179,9 @@ class MyProjectsResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
+            
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),

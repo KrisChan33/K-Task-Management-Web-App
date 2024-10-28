@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Project;
 use App\Models\Task;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -19,12 +20,11 @@ class TaskFactory extends Factory
     public function definition(): array
     {
         return [
-            'project_id' => $this->faker->randomElement([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]),
-            'repeater_data' => [
-                'status' => $this->faker->randomElement(['Pending', 'In Progress', 'Completed']),
-                'name' => $this->faker->sentence,
-                'description' => $this->faker->paragraph,
-            ],
+            // 'project_id' => $this->faker->randomElement(Project::pluck('id')->toArray()),
+            'project_id' => $this->faker->randomElement(Project::pluck('id')->toArray()),
+            'status' => $this->faker->randomElement(['Pending', 'In Progress', 'Completed']),
+            'name' => $this->faker->sentence,
+            'description' => $this->faker->paragraph,
             // 'deadline' => $this->faker->date,
         ];
     }

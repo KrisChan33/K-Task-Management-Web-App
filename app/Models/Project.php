@@ -27,13 +27,12 @@ class Project extends Model
         'created_at' => 'datetime',
 ];
 
-
-protected static function booted()
-{
-    static::creating(function ($project) {
-        $project->user_id = Auth::id();
-    });
-}
+// protected static function booted()
+//     {
+//         static::creating(function ($project) {
+//             $project->user_id = Auth::id();
+//         });
+//     }
 
     public function tasks(){
         return $this->hasMany(Task::class);
