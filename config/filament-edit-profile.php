@@ -54,8 +54,6 @@ return [
             'label' => 'Agree in Confidentiality',
         ],
 
-
-
         'github' => [
             'type' => 'text',
             'label' => 'Github Account',
@@ -77,7 +75,7 @@ return [
             'columnspan' => 4,
             'rules' => 'nullable|string|max:255',
        ],
-       
+
        'facebook' => [
         'type' => 'text',
         'label' => 'Facebook Account',
