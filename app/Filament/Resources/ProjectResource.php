@@ -82,14 +82,14 @@ class ProjectResource extends Resource
             Fieldset::make('Metadata')->schema([
                                 Placeholder::make('user_id')
                                     ->label('User ID')
-                                    ->content(fn ($record) => $record->user_id),
+                                    ->content(fn ($record) => $record->user_id ?? 'None'),
                                 Placeholder::make('user.name')
                                     ->label('Created By')
-                                    ->content(fn ($record) => $record->user->name),
+                                    ->content(fn ($record) => $record->user->name ?? 'None'),
                                 Placeholder::make('created_at')
-                                    ->content(fn (?Project $record): string => optional($record)->created_at?->toFormattedDateString() ?? 'N/A'),
+                                    ->content(fn (?Project $record): string => optional($record)->created_at?->toFormattedDateString() ?? 'None'),
                                 Placeholder::make('updated_at')
-                                    ->content(fn (?Project $record): string => optional($record)->updated_at?->toFormattedDateString() ?? 'N/A'),
+                                    ->content(fn (?Project $record): string => optional($record)->updated_at?->toFormattedDateString() ?? 'None'),
                             ])->grow(false)->columnSpan(12),
         ])->from('sm')->columns(
             [

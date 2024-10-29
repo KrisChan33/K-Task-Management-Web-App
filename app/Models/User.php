@@ -40,7 +40,6 @@ class User extends Authenticatable implements FilamentUser, HasAvatar//, MustVer
         'password',
         'remember_token',
     ];
-
     /**
      * The attributes that should be cast.
      *
@@ -84,5 +83,7 @@ class User extends Authenticatable implements FilamentUser, HasAvatar//, MustVer
             && str_ends_with($this->email, '@gmail.com')
         ;
     }
+
+
 }
 
