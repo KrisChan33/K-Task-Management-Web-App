@@ -61,6 +61,13 @@ class User extends Authenticatable implements FilamentUser, HasAvatar//, MustVer
         return $this->hasMany(Project::class);
     }
 
+
+    public function assignment_task()
+    {
+        return $this->belongsToMany(Task::class, 'user_task');
+    }
+
+
     // User Authenticate valid and email @gmail only
     public function canAccessPanel(Panel $panel): bool
     {

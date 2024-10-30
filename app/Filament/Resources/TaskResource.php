@@ -10,6 +10,7 @@ use Filament\Forms\Components\Group;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Split;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
@@ -29,7 +30,7 @@ class TaskResource extends Resource
     {
         return $form
         ->schema([
-            Group::make([
+            Split::make([
                 Section::make('Task Form')
                     ->label('Task Form')
                     ->description('Fill out the form below to create a new task. Provide the task name and other necessary details to get started.')
@@ -41,7 +42,7 @@ class TaskResource extends Resource
                                 ->required(),
                             Select::make('project_id')
                                 ->label('Project Name')
-                                ->options(Project::where('user_id', Auth::id())->pluck('name', 'id'))
+                                ->relationship('project', 'name') // Corrected relationship method
                                 ->columnSpan(4)
                                 ->required(),
                             Select::make('status')
@@ -62,6 +63,16 @@ class TaskResource extends Resource
                                 ->required(),
                         ]),
                     ]),
+                Section::make()->schema([
+                    Select::make('assignment_user')
+                    ->label('Assign User')
+                    ->relationship('assignment_user', 'name') // Corrected relationship method
+                    ->multiple()
+                    ->preload()
+                    ->required(),
+                ])
+                //another section
+
             ])->columnSpanFull(),
         ]);
         
@@ -90,12 +101,14 @@ class TaskResource extends Resource
                         'In Progress' => 'info',
                         'Completed' => 'success',
                     })
+                    ->default('Pending')
                     ->searchable()
                     ->sortable(),
             ])
             
             ->actions([
                 Tables\Actions\EditAction::make(),
+                
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relatios\BelongsToMany;
 use Illuminate\Support\Facades\Auth;
 
 class Task extends Model 
@@ -21,16 +22,23 @@ class Task extends Model
         'description',
         'status',
         ];
-        
         // protected static function booted()
         // {
         //     static::creating(function ($task) {
         //         $task->project_id = Auth::id();
         //     });
         // }
+        protected $casts = [
+            'created_at' => 'datetime',
+            'updated_at' => 'datetime',
+            
+        ];
 
     public function project(){
         return $this->belongsTo(Project::class);
     }
 
+    public function assignment_user(){
+        return $this->belongsToMany(User::class, 'user_task');
+    }
 }

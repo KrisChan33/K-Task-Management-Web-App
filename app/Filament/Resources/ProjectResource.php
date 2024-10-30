@@ -7,6 +7,7 @@ use App\Filament\Resources\ProjectResource\RelationManagers\TasksRelationManager
 use App\Models\Project;
 use App\Models\Task;
 use App\Models\User;
+use Doctrine\DBAL\SQL\Builder\SelectSQLBuilder;
 use Faker\Provider\ar_EG\Text;
 use Filament\Forms;
 use Filament\Forms\Components\DatePicker;
@@ -79,6 +80,7 @@ class ProjectResource extends Resource
                         ->hintIcon('heroicon-m-question-mark-circle', tooltip: 'Provide a detailed description of the project. The description should be between 2 and 1024 characters.')
                         ->required(),
             ])->columns(12)->columnSpanFull(),
+
             Fieldset::make('Metadata')->schema([
                                 Placeholder::make('user_id')
                                     ->label('User ID')
@@ -91,7 +93,10 @@ class ProjectResource extends Resource
                                 Placeholder::make('updated_at')
                                     ->content(fn (?Project $record): string => optional($record)->updated_at?->toFormattedDateString() ?? 'None'),
                             ])->grow(false)->columnSpan(12),
-        ])->from('sm')->columns(
+            
+                
+
+                            ])->from('sm')->columns(
             [
                 'sm' => 3,
                 'md' => 6,
@@ -100,7 +105,21 @@ class ProjectResource extends Resource
             ]
 
         )->columnSpanFull(),
-      
+
+        Section::make('Assignment')->schema([
+            Select::make('user_id')
+                ->label('Assign User')
+                ->relationship('assignment_user', 'name')
+                ->multiple()
+                ->columnSpan(12)
+                ->required(),
+                ])->grow(false)->columnSpan(
+                        [
+                            'sm' => 3,
+                            'md' => 6,
+                            'lg' => 8,
+                            '2xl' => 12,
+                        ])
       
         // //for Task
         // Section::make('Tasks')
@@ -187,7 +206,7 @@ class ProjectResource extends Resource
     public static function getRelations(): array
     {
         return [
-            TasksRelationManager::class,
+            // TasksRelationManager::class,
         ];
     }
 
