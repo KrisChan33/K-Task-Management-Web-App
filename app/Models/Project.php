@@ -41,5 +41,10 @@ class Project extends Model
     public function user(){
         return $this->belongsTo(User::class);
     }
+    
+    public function assignment_user(){
+        return $this->belongsToMany(User::class, 'user_project');
+
+}
 
 }

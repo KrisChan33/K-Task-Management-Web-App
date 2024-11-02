@@ -93,9 +93,13 @@ class ProjectResource extends Resource
                                 Placeholder::make('updated_at')
                                     ->content(fn (?Project $record): string => optional($record)->updated_at?->toFormattedDateString() ?? 'None'),
                             ])->grow(false)->columnSpan(12),
-            
                 
-
+                            Select::make('assignment_user')
+                            ->label('Assigned User')
+                            ->relationship('assignment_user', 'name')
+                            ->multiple()
+                            ->columnSpan(12)
+                            ->preload()
                             ])->from('sm')->columns(
             [
                 'sm' => 3,
@@ -106,21 +110,23 @@ class ProjectResource extends Resource
 
         )->columnSpanFull(),
 
-        Section::make('Assignment')->schema([
-            Select::make('user_id')
-                ->label('Assign User')
-                ->relationship('assignment_user', 'name')
-                ->multiple()
-                ->columnSpan(12)
-                ->required(),
-                ])->grow(false)->columnSpan(
-                        [
-                            'sm' => 3,
-                            'md' => 6,
-                            'lg' => 8,
-                            '2xl' => 12,
-                        ])
-      
+        // Section::make('Assignment')->schema([
+        //     Select::make('user_id')
+        //         ->label('Assign User')
+        //         ->relationship('assignment_user', 'name')
+        //         ->multiple()
+        //         ->preload()
+        //         ->columnSpan(12)
+        //         ->required(),
+        //         ])->grow(false)->columnSpan(
+        //                 [
+        //                     'sm' => 3,
+        //                     'md' => 6,
+        //                     'lg' => 8,
+        //                     '2xl' => 12,
+        //                 ])
+
+
         // //for Task
         // Section::make('Tasks')
         // ->description('Fill out the form below to create a new task. Provide the task name and other necessary details to get started.')

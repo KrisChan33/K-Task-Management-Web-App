@@ -11,19 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('user_task', function (Blueprint $table) {
+        Schema::create('user_project', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->foreignId('task_id')->constrained()->cascadeOnUpdate();
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('project_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
             $table->timestamps();
         });
     }
-asdasdasdasasasdasdas MAKE IT PROJECT BECAUSE ITS NOT WORKING IN THE TASK. try it again
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-       Schema::dropIfExists('user_task');
+       Schema::dropIfExists('user_project');
     }
 };

@@ -7,6 +7,7 @@ use App\Filament\Resources\MyProjectsResource\RelationManagers;
 use App\Filament\Resources\ProjectResource\RelationManagers\TasksRelationManager;
 use App\Models\MyProjects;
 use App\Models\Project;
+use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Components\Placeholder;
@@ -82,7 +83,11 @@ class MyProjectsResource extends Resource
 
                                 Placeholder::make('updated_at')
                                 ->content(fn (?Project $record): string => optional($record)->updated_at?->toFormattedDateString() ?? 'N/A'),
-                            ])->grow(false)->columnSpan(12),
+
+                                Placeholder::make('created_by')
+                                ->content(fn (?Project $record): string => optional($record)->user->name ?? 'N/A'),
+
+                                ])->grow(false)->columnSpan(12),
         ])->from('sm')->columns(
             [
                 'sm' => 3,
@@ -132,13 +137,15 @@ class MyProjectsResource extends Resource
         //         ->maxItems(30)
         //         ->label('Manage Tasks')
         //     ])->visibleOn('create'),
-            
             ]);
     }
     public static function table(Table $table): Table
     {
         return $table
-        ->query(fn () => Project::query()->where('user_id', Auth::id())) // Filter projects by the logged-in user's ID   
+        ->query(fn () => Project::query()->where('user_id', Auth::id())
+        ->orWhereHas('assignment_user', function ($query) {
+            $query->where('user_id', Auth::id());
+        }))
         ->columns([
                 TextColumn::make('name')
                     ->label('Project Name')
@@ -161,6 +168,10 @@ class MyProjectsResource extends Resource
                     'In Progress' => 'info',
                     'Completed' => 'success',
                 })
+                ->searchable()
+                ->sortable(),
+                TextColumn::make('user.name')
+                ->label('Created By')
                 ->searchable()
                 ->sortable(),
                 // TextColumn::make('created_at')

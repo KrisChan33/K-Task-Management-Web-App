@@ -79,9 +79,16 @@ class MyTaskResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
-            ->query(fn() =>Task::whereHas('project', function ($query) {
+        ->query(fn() => Task::whereHas('project', function ($query) {
+            $query->where('user_id', Auth::id())
+     
+       
+            ->orWhereHas('assignment_user', function ($query) {
                 $query->where('user_id', Auth::id());
-            }))
+        });
+    }))
+
+      
             ->columns([
                 TextColumn::make('name')
                     ->label('Task Name')

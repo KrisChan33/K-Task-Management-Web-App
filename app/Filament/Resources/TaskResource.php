@@ -1,6 +1,7 @@
 <?php
 namespace App\Filament\Resources;
 
+use App\Filament\Resources\ProjectResource\RelationManagers\TasksRelationManager;
 use App\Filament\Resources\TaskResource\Pages;
 use App\Models\Project;
 use App\Models\Task;
@@ -20,6 +21,7 @@ use Filament\Tables\Columns\SelectColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Support\Facades\Auth;
+use Spatie\Permission\Contracts\Role;
 
 class TaskResource extends Resource
 {
@@ -63,14 +65,21 @@ class TaskResource extends Resource
                                 ->required(),
                         ]),
                     ]),
-                Section::make()->schema([
-                    Select::make('assignment_user')
-                    ->label('Assign User')
-                    ->relationship('assignment_user', 'name') // Corrected relationship method
-                    ->multiple()
-                    ->preload()
-                    ->required(),
-                ])
+                    Section::make('Assignment')->schema([
+                        Select::make('user_id')
+                            ->label('Assign User')
+                            ->relationship('assignment_user', 'name')
+                            ->multiple()
+                            ->preload()
+                            ->columnSpan(12)
+                            ->required(),
+                            ])->grow(false)->columnSpan(
+                                    [
+                                        'sm' => 3,
+                                        'md' => 6,
+                                        'lg' => 8,
+                                        '2xl' => 12,
+                                    ])
                 //another section
 
             ])->columnSpanFull(),
@@ -105,7 +114,6 @@ class TaskResource extends Resource
                     ->searchable()
                     ->sortable(),
             ])
-            
             ->actions([
                 Tables\Actions\EditAction::make(),
                 
@@ -117,7 +125,10 @@ class TaskResource extends Resource
 
     public static function getRelations(): array
     {
-        return [];
+        return [
+            // TasksRelationManager::class,
+
+        ];
     }
 
     public static function getPages(): array

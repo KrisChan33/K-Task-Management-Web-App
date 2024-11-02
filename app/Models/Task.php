@@ -15,7 +15,7 @@ class Task extends Model
      *
      * @var array<int, string>t
      */
-
+    
     protected $fillable = [
         'name',
         'project_id',
@@ -38,7 +38,4 @@ class Task extends Model
         return $this->belongsTo(Project::class);
     }
 
-    public function assignment_user(){
-        return $this->belongsToMany(User::class, 'user_task');
-    }
 }

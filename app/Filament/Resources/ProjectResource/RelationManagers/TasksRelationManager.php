@@ -22,7 +22,7 @@ class TasksRelationManager extends RelationManager
     {
         return $form
             ->schema([
-                Section::make('project_id')
+                Section::make('Task Form')
                     ->schema([
                         TextInput::make('name')
                             ->label('Task Name')
@@ -55,7 +55,7 @@ class TasksRelationManager extends RelationManager
     {
         return $table
         ->modifyQueryUsing(function ($query) {
-            return $query->where('project_id', $this->ownerRecord->id);
+            return $query->where('project_id', $this->ownerRecord->id ?? 'NULL');
         })
         ->columns([
             TextColumn::make('name')
@@ -79,7 +79,6 @@ class TasksRelationManager extends RelationManager
             ->searchable()
             ->sortable(),
         ])->description('Tasks belonging to this project')
-
         
             ->headerActions([
                 Tables\Actions\CreateAction::make(),
@@ -92,5 +91,4 @@ class TasksRelationManager extends RelationManager
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
-
 }
