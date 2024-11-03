@@ -56,16 +56,6 @@ class User extends Authenticatable implements FilamentUser, HasAvatar//, MustVer
         return $this->avatar_url ? Storage::url("$this->avatar_url") : null;
     }
 
-    public function project()
-    {
-        return $this->hasMany(Project::class);
-    }
-
-    public function assignment_project()
-    {
-        return $this->belongsToMany(Project::class, 'user_project');
-    }
-
     // User Authenticate valid and email @gmail only
     public function canAccessPanel(Panel $panel): bool
     {
@@ -87,5 +77,20 @@ class User extends Authenticatable implements FilamentUser, HasAvatar//, MustVer
         return $this->hasRole(config('filament-shield.super_admin.name')) || $this->hasRole(config('filament-shield.panel_user.name'))
             && str_ends_with($this->email, '@gmail.com')
         ;
+    }
+
+    public function project()
+    {
+        return $this->hasMany(Project::class);
+    }
+
+    public function assignment_project()
+    {
+        return $this->belongsToMany(Project::class, 'user_project');
+    }
+    
+    public function comments()
+    {
+        return $this->morphMany(Comment::class, 'commentable');
     }
 }

@@ -25,7 +25,7 @@ class Project extends Model
     protected $casts = [
         'updated_at' => 'datetime',
         'created_at' => 'datetime',
-];
+        ];
 
 // protected static function booted()
 //     {
@@ -44,7 +44,12 @@ class Project extends Model
     
     public function assignment_user(){
         return $this->belongsToMany(User::class, 'user_project');
+    }
+    
+    public function comments()
+    {
+        return $this->morphMany(Comment::class, 'commentable');
+    }
 
-}
-
+    
 }
