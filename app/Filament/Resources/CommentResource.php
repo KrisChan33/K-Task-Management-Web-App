@@ -32,10 +32,11 @@ class CommentResource extends Resource
             ->schema([
             Section::make('Comment Information')
             ->schema([
-                    
                 Select::make('user_id')
                 ->label('User Commented')
+                ->disabled()
                 ->searchable()
+                ->preload()
                 ->relationship('user', 'name')
                 ->columnSpan(6)
                 ->required(),

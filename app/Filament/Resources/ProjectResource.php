@@ -3,6 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\ProjectResource\Pages;
+use App\Filament\Resources\ProjectResource\RelationManagers\CommentsRelationManager;
 use App\Filament\Resources\ProjectResource\RelationManagers\TasksRelationManager;
 use App\Models\Project;
 use App\Models\Task;
@@ -213,6 +214,7 @@ class ProjectResource extends Resource
     {
         return [
             // TasksRelationManager::class,
+            CommentsRelationManager::class,
         ];
     }
 
