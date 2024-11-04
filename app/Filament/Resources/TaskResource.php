@@ -148,5 +148,4 @@ class TaskResource extends Resource
         
         return Auth::check() && Auth::user() === $user->hasRole('super_admin');
     }
-
 }
