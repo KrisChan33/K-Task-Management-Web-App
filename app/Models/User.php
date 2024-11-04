@@ -30,7 +30,6 @@ class User extends Authenticatable implements FilamentUser, HasAvatar//, MustVer
         'avatar_url',
         'password',
     ];
-
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -49,6 +48,17 @@ class User extends Authenticatable implements FilamentUser, HasAvatar//, MustVer
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+    
+
+  /**
+     * Check if the user has the 'super-admin' role.
+     *
+     * @return bool
+     */
+    public function isAdmin(): bool
+    {
+        return $this->hasRole('super_admin') && true;
+    }
 
     //for avatar edit profile
     public function getFilamentAvatarUrl(): ?string

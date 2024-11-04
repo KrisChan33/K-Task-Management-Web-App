@@ -12,7 +12,6 @@ class Comment extends Model
 
     protected $guarded = [];
 
-
     protected static function booted()
     {
         static::creating(function ($comment) {
@@ -30,5 +29,4 @@ class Comment extends Model
         return $this->belongsTo(User::class);
     }
 
-    
 }

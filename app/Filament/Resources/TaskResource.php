@@ -5,6 +5,7 @@ use App\Filament\Resources\ProjectResource\RelationManagers\TasksRelationManager
 use App\Filament\Resources\TaskResource\Pages;
 use App\Models\Project;
 use App\Models\Task;
+use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Group;
@@ -26,7 +27,8 @@ use Spatie\Permission\Contracts\Role;
 class TaskResource extends Resource
 {
     protected static ?string $model = Task::class;
-    protected static ?string $navigationGroup = 'Project Management';
+    protected static ?string $navigationGroup = 'Project Management (Dev Only)';
+
     protected static ?string $label = 'All Task';
     public static function form(Form $form): Form
     {
@@ -139,4 +141,12 @@ class TaskResource extends Resource
             'edit' => Pages\EditTask::route('/{record}/edit'),
         ];
     }
+
+    public static function canViewAny(): bool
+    {
+        $user = User::find(Auth::id());
+        
+        return Auth::check() && Auth::user() === $user->hasRole('super_admin');
+    }
+
 }

@@ -42,7 +42,9 @@ class ProjectResource extends Resource
 {
     protected static ?string $model = Project::class;
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-    protected static ?string $navigationGroup = 'Project Management';
+    protected static ?string $navigationGroup = 'Project Management (Dev Only)';
+
+
     protected static ?string $label = 'All Projects';
     
     public static function form(Form $form): Form
@@ -227,5 +229,10 @@ class ProjectResource extends Resource
         ];
     }
 
-
+    public static function canViewAny(): bool
+    {
+        $user = User::find(Auth::id());
+        
+        return Auth::check() && Auth::user() === $user->hasRole('super_admin');
+    }
 }

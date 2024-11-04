@@ -2,9 +2,12 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Resources\MyprojectResource\RelationManagers\CommentsRelationManager;
 use App\Filament\Resources\MyProjectsResource\Pages;
 use App\Filament\Resources\MyProjectsResource\RelationManagers;
+use App\Filament\Resources\ProjectResource\RelationManagers\CommentsRelationManager as RelationManagersCommentsRelationManager;
 use App\Filament\Resources\ProjectResource\RelationManagers\TasksRelationManager;
+use App\Models\Comment;
 use App\Models\MyProjects;
 use App\Models\Project;
 use App\Models\User;
@@ -204,6 +207,7 @@ class MyProjectsResource extends Resource
     {
         return [
             TasksRelationManager::class,
+            RelationManagersCommentsRelationManager::class,
         ];
     }
 
