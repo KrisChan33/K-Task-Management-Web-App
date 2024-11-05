@@ -42,7 +42,7 @@ class ProjectResource extends Resource
 {
     protected static ?string $model = Project::class;
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-    protected static ?string $navigationGroup = 'Project Management (Dev Only)';
+    protected static ?string $navigationGroup = 'Project Management (Admin)';
 
 
     protected static ?string $label = 'All Projects';
@@ -167,11 +167,11 @@ class ProjectResource extends Resource
         ->columns([
                 TextColumn::make('name')
                     ->label('Project Name')
-                    ->icon('heroicon-o-user')
+                    ->icon('heroicon-s-document-text')
                     ->iconPosition('before')
+                    ->iconColor('primary')
                     ->limit(25)
                     ->searchable()
-                    ->iconColor('primary')
                     ->sortable('asc'),
                 TextColumn::make('description')
                     ->searchable()
@@ -204,10 +204,12 @@ class ProjectResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
+
                 ]),
             ]);
     }
@@ -215,7 +217,7 @@ class ProjectResource extends Resource
     public static function getRelations(): array
     {
         return [
-            // TasksRelationManager::class,
+            TasksRelationManager::class,
             CommentsRelationManager::class,
         ];
     }
@@ -232,7 +234,7 @@ class ProjectResource extends Resource
     public static function canViewAny(): bool
     {
         $user = User::find(Auth::id());
-        
-        return Auth::check() && Auth::user() === $user->hasRole('super_admin');
+
+        return Auth::check() && Auth::user() == $user->hasRole('super_admin');
     }
 }

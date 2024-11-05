@@ -23,9 +23,8 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class CommentResource extends Resource
 {
     protected static ?string $model = Comment::class;
-
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-    protected static ?string $navigationGroup = 'Project Management (Dev Only)';
+    protected static ?string $navigationIcon = 'heroicon-o-chat-bubble-left-right';
+    protected static ?string $navigationGroup = 'Project Management (Admin)';
 
 
     public static function form(Form $form): Form
@@ -76,13 +75,23 @@ class CommentResource extends Resource
             ->columns([
                 //
                 TextColumn::make('user.name')
-                    ->label('User Commented'),
-                    TextColumn::make('comment')
+                    ->label('User Commented')
+                    ->icon('heroicon-s-user')
+                    ->iconColor('primary')
+                    ->iconPosition('before')
+                    ->searchable()
+                    ->sortable()
+                    ->limit(25)
+                    ,
+                TextColumn::make('comment')
                     ->label('Comment')
-                    ->limit(30),
+                    ->limit(30)
+                    ->icon('heroicon-s-chat-bubble-left')
+                    ->iconColor('primary')
+                    ->iconPosition('before'),
                 TextColumn::make('commentable_type')
                     ->label('Where Commented'),
-                TextColumn::make('commentable_id')
+                TextColumn::make('commentable.name')
                     ->label('Commented On')
                     ->limit(30),
             ])

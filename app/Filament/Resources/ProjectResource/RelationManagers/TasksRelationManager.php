@@ -27,7 +27,8 @@ class TasksRelationManager extends RelationManager
                         TextInput::make('name')
                             ->label('Task Name')
                             ->columnSpan(6)
-                            ->required(),
+                          ->disabled(fn (?Task $record): bool => $record && $record->user_id !== Auth::id())
+                        ->required(),
                         Select::make('status')
                             ->label('Status')
                             ->options([
@@ -41,6 +42,7 @@ class TasksRelationManager extends RelationManager
                         Textarea::make('description')
                             ->label('Description')
                             ->rows(10)
+                          ->disabled(fn (?Task $record): bool => $record && $record->user_id !== Auth::id())
                             ->cols(20)
                             ->columnSpan(12)
                             ->minLength(2)
@@ -75,6 +77,7 @@ class TasksRelationManager extends RelationManager
                 'Pending' => 'warning',
                 'In Progress' => 'info',
                 'Completed' => 'success',
+                 
             })
             ->searchable()
             ->sortable(),
@@ -85,10 +88,11 @@ class TasksRelationManager extends RelationManager
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\DeleteAction::make()
+                ->visible(fn (Task $record): bool => $record->project->user_id === Auth::id()),
+
             ])
             ->bulkActions([
-                Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
 }

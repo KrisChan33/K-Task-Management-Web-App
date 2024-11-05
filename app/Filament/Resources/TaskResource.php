@@ -27,7 +27,7 @@ use Spatie\Permission\Contracts\Role;
 class TaskResource extends Resource
 {
     protected static ?string $model = Task::class;
-    protected static ?string $navigationGroup = 'Project Management (Dev Only)';
+    protected static ?string $navigationGroup = 'Project Management (Admin)';
 
     protected static ?string $label = 'All Task';
     public static function form(Form $form): Form
@@ -67,21 +67,23 @@ class TaskResource extends Resource
                                 ->required(),
                         ]),
                     ]),
-                    Section::make('Assignment')->schema([
-                        Select::make('user_id')
-                            ->label('Assign User')
-                            ->relationship('assignment_user', 'name')
-                            ->multiple()
-                            ->preload()
-                            ->columnSpan(12)
-                            ->required(),
-                            ])->grow(false)->columnSpan(
-                                    [
-                                        'sm' => 3,
-                                        'md' => 6,
-                                        'lg' => 8,
-                                        '2xl' => 12,
-                                    ])
+                    // Section::make('Assignment')->schema([
+                    //     Select::make('user_id')
+                    //         ->label('Assign User')
+                    //         ->relationship('project', 'user_id') // Corrected relationship method
+                    //         ->default(Auth::id())
+                    //         ->multiple()
+                    //         ->visibleOn('edit')
+                    //         ->preload()
+                    //         ->columnSpan(12)
+                    //         ->required(),
+                    //         ])->grow(false)->columnSpan(
+                    //                 [
+                    //                     'sm' => 3,
+                    //                     'md' => 6,
+                    //                     'lg' => 8,
+                    //                     '2xl' => 12,
+                    //                 ])
                 //another section
 
             ])->columnSpanFull(),
@@ -95,6 +97,9 @@ class TaskResource extends Resource
             ->columns([
                 TextColumn::make('name')
                     ->label('Task Name')
+                    ->icon('heroicon-s-clipboard-document-list')
+                    ->iconColor('primary')
+                    ->iconPosition('before')
                     ->limit(25)
                     ->searchable()
                     ->sortable(),
@@ -118,6 +123,7 @@ class TaskResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
                 
             ])
             ->bulkActions([
@@ -129,7 +135,6 @@ class TaskResource extends Resource
     {
         return [
             // TasksRelationManager::class,
-
         ];
     }
 
@@ -145,7 +150,6 @@ class TaskResource extends Resource
     public static function canViewAny(): bool
     {
         $user = User::find(Auth::id());
-        
-        return Auth::check() && Auth::user() === $user->hasRole('super_admin');
+        return Auth::check() && Auth::user() == $user->hasRole('super_admin');
     }
 }

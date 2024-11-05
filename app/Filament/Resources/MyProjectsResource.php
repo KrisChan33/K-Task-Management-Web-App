@@ -50,6 +50,7 @@ class MyProjectsResource extends Resource
                         ->label('Project Name')
                         ->hintIcon('heroicon-m-question-mark-circle', tooltip: 'Enter the name of the project.')
                         ->columnSpan(8)
+                        ->disabled(fn (?Project $record): bool => $record && $record->user_id !== Auth::id())
                         ->required(),
                         Select::make('status')
                         ->label('Status')
@@ -61,6 +62,7 @@ class MyProjectsResource extends Resource
                         ->hintIcon('heroicon-m-question-mark-circle', tooltip: 'Select the current status of the project.')
                         ->columnSpan(4)
                         ->default('Not Started')
+                        ->disabled(fn (?Project $record): bool => $record && $record->user_id !== Auth::id())
                         ->required(),
                     Textarea::make('description')
                         ->label('Description')
@@ -72,6 +74,7 @@ class MyProjectsResource extends Resource
                         ->minLength(2)
                         ->maxLength(1024)
                         ->hintIcon('heroicon-m-question-mark-circle', tooltip: 'Provide a detailed description of the project. The description should be between 2 and 1024 characters.')
+                        ->disabled(fn (?Project $record): bool => $record && $record->user_id !== Auth::id())
                         ->required(),
             ])->columns(12)->columnSpanFull(),
             Fieldset::make('Metadata')->schema([
@@ -82,15 +85,15 @@ class MyProjectsResource extends Resource
                                 // ->content(fn (?Project $record): string => optional($record)->end_date?->toFormattedDateString() ?? 'N/A'),
                         
                                 Placeholder::make('created_at')
-                                ->content(fn (?Project $record): string => optional($record)->created_at?->toFormattedDateString() ?? 'N/A'),
+                                ->content(fn (?Project $record): string => optional($record)->created_at?->toFormattedDateString() ?? 'None'),
 
                                 Placeholder::make('updated_at')
-                                ->content(fn (?Project $record): string => optional($record)->updated_at?->toFormattedDateString() ?? 'N/A'),
+                                ->content(fn (?Project $record): string => optional($record)->updated_at?->toFormattedDateString() ?? 'None'),
 
                                 Placeholder::make('created_by')
-                                ->content(fn (?Project $record): string => optional($record)->user->name ?? 'N/A'),
-
+                                ->content(fn (?Project $record): string => optional($record)->user->name ?? 'None'),
                                 ])->grow(false)->columnSpan(12),
+
         ])->from('sm')->columns(
             [
                 'sm' => 3,
@@ -98,10 +101,7 @@ class MyProjectsResource extends Resource
                 'lg' => 8,
                 '2xl' => 12,
             ]
-
         )->columnSpanFull(),
-
-
         // //for Task
         // Section::make('Tasks')
         // ->description('Fill out the form below to create a new task. Provide the task name and other necessary details to get started.')
@@ -152,7 +152,7 @@ class MyProjectsResource extends Resource
         ->columns([
                 TextColumn::make('name')
                     ->label('Project Name')
-                    ->icon('heroicon-o-user')
+                    ->icon('heroicon-s-document-text')
                     ->iconPosition('before')
                     ->limit(25)
                     ->searchable()
@@ -193,12 +193,14 @@ class MyProjectsResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\DeleteAction::make()
+                ->visible(fn (Project $record): bool => $record->user_id === Auth::id()),
             ])
             
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+                    Tables\Actions\DeleteBulkAction::make()
+                    ->visible(fn (Project $record): bool => $record->user_id === Auth::id()),
                 ]),
             ]);
     }

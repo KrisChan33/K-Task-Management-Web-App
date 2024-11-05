@@ -52,6 +52,8 @@ class MyTaskResource extends Resource
                             Select::make('project_id')
                                 ->label('Project Name')
                                 ->options(Project::where('user_id', Auth::id())->pluck('name', 'id'))
+                                ->visibleOn('create')
+                                ->preload()
                                 ->columnSpan(4)
                                 ->required(),
                             Select::make('status')
@@ -62,6 +64,7 @@ class MyTaskResource extends Resource
                                     'Completed' => 'Completed',
                                 ])
                                 ->default('Pending')
+                                ->columnSpanFull()
                                 ->columnSpan(2)
                                 ->required(),
                             Textarea::make('description')
@@ -87,11 +90,12 @@ class MyTaskResource extends Resource
                 $query->where('user_id', Auth::id());
         });
     }))
-
-      
             ->columns([
                 TextColumn::make('name')
                     ->label('Task Name')
+                    ->icon('heroicon-s-clipboard-document-list')
+                    ->iconColor('primary')
+                    ->iconPosition('before')
                     ->limit(25)
                     ->searchable()
                     ->sortable(),
@@ -116,13 +120,13 @@ class MyTaskResource extends Resource
                     ->searchable()
                     ->sortable(),
             ])
-            
             ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                // Tables\Actions\EditAction::make(),
+                // Tables\Actions\DeleteAction::make()
+                // ->visible(fn (Task $record): bool => $record->project->user_id === Auth::id()),
             ])
             ->bulkActions([
-                Tables\Actions\DeleteBulkAction::make(),
+                // Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
 
@@ -136,7 +140,7 @@ class MyTaskResource extends Resource
         return [
             'index' => Pages\ListMyTasks::route('/'),
             'create' => Pages\CreateMyTask::route('/create'),
-            'edit' => Pages\EditMyTask::route('/{record}/edit'),
+            // 'edit' => Pages\EditMyTask::route('/{record}/edit'),
         ];
     }
 }
