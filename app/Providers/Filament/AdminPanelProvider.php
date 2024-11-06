@@ -49,7 +49,7 @@ class AdminPanelProvider extends PanelProvider
             
             //Themes and fonts and sizes are
             ->defaultThemeMode(ThemeMode::Dark)
-            ->font('DM Sans')
+            ->font('Poppins')
             ->colors([
                 'danger' => Color::Rose,
                 'info' => Color::Blue,
@@ -84,10 +84,10 @@ class AdminPanelProvider extends PanelProvider
             ])->plugins([
                FilamentShieldPlugin::make(),
                FilamentEditProfilePlugin::make()
-                    ->slug('My Profile')
-                    ->setTitle('My Profile')
-                    ->setNavigationLabel('My Profile')
-                    // ->setNavigationGroup('Group Profile')
+                    ->slug('Edit My Profile')
+                    ->setTitle('Edit My Profile')
+                    // ->setNavigationLabel('My Profile')
+                    ->setNavigationGroup('User Management')
                     ->setIcon('heroicon-o-user')
                     // ->setSort(10)
                     // ->canAccess(fn () => auth()->user()->id === 1)

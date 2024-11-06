@@ -4,9 +4,13 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\CommentResource\Pages;
 use App\Filament\Resources\CommentResource\RelationManagers;
+use App\Filament\Resources\ProjectResource\RelationManagers\CommentsRelationManager;
 use App\Models\Comment;
 use App\Models\Project;
+use App\Models\Task;
 use App\Models\User;
+use Filament\Actions\DeleteAction;
+use Filament\Actions\EditAction;
 use Filament\Forms;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\MorphToSelect;
@@ -19,13 +23,14 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Facades\Auth;
 
 class CommentResource extends Resource
 {
     protected static ?string $model = Comment::class;
     protected static ?string $navigationIcon = 'heroicon-o-chat-bubble-left-right';
     protected static ?string $navigationGroup = 'Project Management (Admin)';
-
+    protected static ?string $label = 'Comments Controller';
 
     public static function form(Form $form): Form
     {
@@ -40,7 +45,7 @@ class CommentResource extends Resource
                 ->preload()
                 ->relationship('user', 'name')
                 ->columnSpan(6)
-                ->required(),
+                ,
 
             MorphToSelect::make('commentable')
                 ->label('Where Commented')
@@ -100,6 +105,7 @@ class CommentResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -122,5 +128,12 @@ class CommentResource extends Resource
             'create' => Pages\CreateComment::route('/create'),
             'edit' => Pages\EditComment::route('/{record}/edit'),
         ];
+    }
+
+    public static function canViewAny(): bool
+    {
+        $user = User::find(Auth::id());
+
+        return Auth::check() && Auth::user() == $user->hasRole('super_admin');
     }
 }

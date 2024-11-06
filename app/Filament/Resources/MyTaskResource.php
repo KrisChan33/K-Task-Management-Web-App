@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\MyTaskResource\Pages;
 use App\Filament\Resources\MyTaskResource\RelationManagers;
+use App\Filament\Resources\ProjectResource\RelationManagers\CommentsRelationManager;
 use App\Models\MyTask;
 use App\Models\Project;
 use App\Models\Task;
@@ -30,9 +31,8 @@ use Illuminate\Support\Facades\Auth;
 class MyTaskResource extends Resource
 {
     protected static ?string $model = Task::class;
-    protected static ?string $navigationParentItem = 'My Projects';
-
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationParentItem = 'Projects';
+    protected static ?string $navigationIcon = 'heroicon-o-clipboard-document-list';
     protected static ?string $navigationGroup = 'Project Management';
 
     public static function form(Form $form): Form
@@ -52,7 +52,8 @@ class MyTaskResource extends Resource
                             Select::make('project_id')
                                 ->label('Project Name')
                                 ->options(Project::where('user_id', Auth::id())->pluck('name', 'id'))
-                                ->visibleOn('create')
+                                // ->visibleOn('create', 'view')
+                                ->disabledOn('edit')
                                 ->preload()
                                 ->columnSpan(4)
                                 ->required(),
@@ -84,8 +85,6 @@ class MyTaskResource extends Resource
         return $table
         ->query(fn() => Task::whereHas('project', function ($query) {
             $query->where('user_id', Auth::id())
-     
-       
             ->orWhereHas('assignment_user', function ($query) {
                 $query->where('user_id', Auth::id());
         });
@@ -119,9 +118,11 @@ class MyTaskResource extends Resource
                     })
                     ->searchable()
                     ->sortable(),
-            ])
+            ])->description('Tasks assigned to you or your Task. Remember you can\'t edit the project name after created.')
             ->actions([
-                // Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make(),
+                    Tables\Actions\ViewAction::make(),
+
                 // Tables\Actions\DeleteAction::make()
                 // ->visible(fn (Task $record): bool => $record->project->user_id === Auth::id()),
             ])
@@ -132,7 +133,9 @@ class MyTaskResource extends Resource
 
     public static function getRelations(): array
     {
-        return [];
+        return [
+            //
+        ];
     }
 
     public static function getPages(): array

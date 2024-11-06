@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\MyprojectResource\RelationManagers\CommentsRelationManager;
 use App\Filament\Resources\MyProjectsResource\Pages;
 use App\Filament\Resources\MyProjectsResource\RelationManagers;
+use App\Filament\Resources\MyProjectsResource\RelationManagers\CommentsRelationManager as MyProjectsResourceRelationManagersCommentsRelationManager;
 use App\Filament\Resources\ProjectResource\RelationManagers\CommentsRelationManager as RelationManagersCommentsRelationManager;
 use App\Filament\Resources\ProjectResource\RelationManagers\TasksRelationManager;
 use App\Models\Comment;
@@ -21,6 +22,7 @@ use Filament\Forms\Components\Split;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
+use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
@@ -33,10 +35,12 @@ use Illuminate\Support\Facades\Auth;
 class MyProjectsResource extends Resource
 {
     protected static ?string $model = Project::class;
+    
+    protected static ?int $navigationSort = 1;
 
     protected static string $icon = 'heroicon-o-rectangle-stack';
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-    protected static ?string $label = 'My Projects';
+    protected static ?string $label = 'Projects';
     protected static ?string $navigationGroup = 'Project Management';
 
     public static function form(Form $form): Form
@@ -83,7 +87,6 @@ class MyProjectsResource extends Resource
                                 
                                 // Placeholder::make('end_date')
                                 // ->content(fn (?Project $record): string => optional($record)->end_date?->toFormattedDateString() ?? 'N/A'),
-                        
                                 Placeholder::make('created_at')
                                 ->content(fn (?Project $record): string => optional($record)->created_at?->toFormattedDateString() ?? 'None'),
 
@@ -209,7 +212,8 @@ class MyProjectsResource extends Resource
     {
         return [
             TasksRelationManager::class,
-            RelationManagersCommentsRelationManager::class,
+            MyProjectsResourceRelationManagersCommentsRelationManager::class
+            
         ];
     }
 

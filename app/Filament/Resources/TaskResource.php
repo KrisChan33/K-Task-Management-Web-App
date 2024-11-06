@@ -29,7 +29,7 @@ class TaskResource extends Resource
     protected static ?string $model = Task::class;
     protected static ?string $navigationGroup = 'Project Management (Admin)';
 
-    protected static ?string $label = 'All Task';
+    protected static ?string $label = 'Task Controller';
     public static function form(Form $form): Form
     {
         return $form

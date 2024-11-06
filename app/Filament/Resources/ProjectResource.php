@@ -45,7 +45,7 @@ class ProjectResource extends Resource
     protected static ?string $navigationGroup = 'Project Management (Admin)';
 
 
-    protected static ?string $label = 'All Projects';
+    protected static ?string $label = 'Project Controller';
     
     public static function form(Form $form): Form
     {
@@ -217,7 +217,7 @@ class ProjectResource extends Resource
     public static function getRelations(): array
     {
         return [
-            TasksRelationManager::class,
+            // TasksRelationManager::class,
             CommentsRelationManager::class,
         ];
     }

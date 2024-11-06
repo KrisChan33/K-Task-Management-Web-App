@@ -19,6 +19,12 @@ class Comment extends Model
         });
     }
 
+    // to simplify the commentable_type in the resource table
+    public function getSimplifiedCommentableTypeAttribute()
+    {
+        return class_basename($this->commentable_type);
+    }
+
     public function commentable()
     {
         return $this->morphTo();
