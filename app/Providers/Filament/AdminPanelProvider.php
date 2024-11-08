@@ -43,10 +43,8 @@ class AdminPanelProvider extends PanelProvider
             ->profile(EditProfilePage::class)//->profile(isSimple: false)
             //breadcrumbs navigation upper part of page that informs the user of their current location within the application
             // ->breadcrumbs(false);
-            
             //security check for the user
             ->authGuard('web')
-            
             //Themes and fonts and sizes are
             ->defaultThemeMode(ThemeMode::Dark)
             ->font('Poppins')
@@ -82,8 +80,8 @@ class AdminPanelProvider extends PanelProvider
             ->authMiddleware([
                 Authenticate::class,
             ])->plugins([
-               FilamentShieldPlugin::make(),
-               FilamentEditProfilePlugin::make()
+                FilamentShieldPlugin::make(),
+                FilamentEditProfilePlugin::make()
                     ->slug('Edit My Profile')
                     ->setTitle('Edit My Profile')
                     // ->setNavigationLabel('My Profile')
@@ -116,8 +114,6 @@ class AdminPanelProvider extends PanelProvider
                     ->enforceTwoFactorSetup(
                         false, // Enforce 2FA setup for all users
                     ) 
-
-
                     //add new plugin here VVV
             ])
             //for edit-profile-plugin
@@ -137,6 +133,5 @@ class AdminPanelProvider extends PanelProvider
             //         ->url(fn (): string => Settings::getUrl())
             //         ->icon('heroicon-o-cog-6-tooth'),
             // ]);
-            
     }
 }
