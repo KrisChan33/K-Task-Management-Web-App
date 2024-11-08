@@ -32,7 +32,7 @@ class AdminPanelProvider extends PanelProvider
     {
         return $panel
             ->default()
-            ->id('K-Task-Management-System')
+            ->id('K-Task-Management-Web-App')
             ->brandName('K Task Management Sys')
             ->path('admin')
             //authentications

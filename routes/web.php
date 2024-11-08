@@ -29,4 +29,4 @@ Route::get('/home', function () {
     return view('welcome');
 });
 
-// Route::post('password/reset')->name('filament.K-Task-Management-Sys.auth.password-reset.update');
+// Route::post('password/reset')->name('filament.K-Task-Management-Web-App.auth.password-reset.update');

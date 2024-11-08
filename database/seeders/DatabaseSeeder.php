@@ -11,10 +11,7 @@ use BezhanSalleh\FilamentShield\Resources\RoleResource;
 use BezhanSalleh\FilamentShield\Resources\RoleResource\Pages\CreateRole;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Artisan;
-use Illuminate\Support\Facades\Hash;
-use Spatie\Permission\Commands\CreateRole as CommandsCreateRole;
 use Spatie\Permission\Contracts\Role;
-use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role as ModelsRole;
 
 class DatabaseSeeder extends Seeder
@@ -24,28 +21,26 @@ class DatabaseSeeder extends Seeder
      */
  public function run(): void
     {
-        // Create users
-        User::factory()->create([
+       User::factory()->create([
             'id' => 1,
-            'name'=> 'super_admin',
+            'name'=> 'Super Admin',
             'email' => 'superadmin@gmail.com',
             'avatar_url' => '',
             'email_verified_at' => now(),
-            'password' => Hash::make('123'), // Use Hash::make to hash the password
+            'password' => 'K-is-king',
             'remember_token' => '0000000000000000000',
         ]);
-        User::factory()->create([
+
+       User::factory()->create([
             'id' => 2,
             'name'=> 'Student Full Name',
             'email' => 'student@gmail.com',
             'avatar_url' => '',
             'email_verified_at' => now(),
-            'password' => Hash::make('123'), // Use Hash::make to hash the password
+            'password' => 'K-is-dev',
             'remember_token' => '0000000000000000000',
         ]);
-        User::factory(10)->create();
-        Project::factory(10)->create();
-        Task::factory(10)->create();
-
+        // for creating user
+        // User::factory(3)->create();
     }
 }
