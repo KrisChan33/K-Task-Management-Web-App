@@ -33,7 +33,7 @@ class AdminPanelProvider extends PanelProvider
         return $panel
             ->default()
             ->id('K-Task-Management-Web-App')
-            ->brandName('K Task Management Sys')
+            ->brandName('K Task Management  WA')
             ->path('admin')
             //authentications
             ->login()
@@ -109,11 +109,11 @@ class AdminPanelProvider extends PanelProvider
                     //     \App\Livewire\CustomProfileComponent::class,])
                     
                     // Enforce 2FA setup for all users
-                    TwoFactorAuthenticationPlugin::make()
-                    ->addTwoFactorMenuItem() // Add 2FA settings to user menu items
-                    ->enforceTwoFactorSetup(
-                        false, // Enforce 2FA setup for all users
-                    ) 
+                    // TwoFactorAuthenticationPlugin::make()
+                    // ->addTwoFactorMenuItem() // Add 2FA settings to user menu items
+                    // ->enforceTwoFactorSetup(
+                    //     false, // Enforce 2FA setup for all users
+                    // ) 
                     //add new plugin here VVV
             ])
             //for edit-profile-plugin

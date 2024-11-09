@@ -62,7 +62,9 @@ class CommentsRelationManager extends RelationManager
             ->actions([
                 Tables\Actions\EditAction::make()
                 ->visible(fn ($record) => $record->user_id === auth()->id()),
-                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\DeleteAction::make()
+                ->visible(fn ($record) => $record->user_id === auth()->id()),
+
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

@@ -31,6 +31,7 @@ class CommentResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-chat-bubble-left-right';
     protected static ?string $navigationGroup = 'Project Management (Admin)';
     protected static ?string $label = 'Comments Controller';
+    protected static ?int $navigationSort = 1;
 
     public static function form(Form $form): Form
     {

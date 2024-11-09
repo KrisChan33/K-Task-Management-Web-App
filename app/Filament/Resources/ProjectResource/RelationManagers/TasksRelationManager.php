@@ -66,7 +66,6 @@ class TasksRelationManager extends RelationManager
             return $query->where('project_id', $this->ownerRecord->id ?? 'NULL');
         })
         ->columns([
-           
             TextColumn::make('name')
             ->label('Task Name')
             ->limit(25)

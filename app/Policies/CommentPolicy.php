@@ -15,7 +15,7 @@ class CommentPolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->can('view_any_comment');
+        return $user->can('view_any_my::comment');
     }
 
     /**
@@ -23,7 +23,7 @@ class CommentPolicy
      */
     public function view(User $user, Comment $comment): bool
     {
-        return $user->can('view_comment');
+        return $user->can('view_my::comment');
     }
 
     /**
@@ -31,7 +31,7 @@ class CommentPolicy
      */
     public function create(User $user): bool
     {
-        return $user->can('create_comment');
+        return $user->can('create_my::comment');
     }
 
     /**
@@ -39,7 +39,7 @@ class CommentPolicy
      */
     public function update(User $user, Comment $comment): bool
     {
-        return $user->can('update_comment');
+        return $user->can('update_my::comment');
     }
 
     /**
@@ -47,7 +47,7 @@ class CommentPolicy
      */
     public function delete(User $user, Comment $comment): bool
     {
-        return $user->can('delete_comment');
+        return $user->can('delete_my::comment');
     }
 
     /**
@@ -55,7 +55,7 @@ class CommentPolicy
      */
     public function deleteAny(User $user): bool
     {
-        return $user->can('delete_any_comment');
+        return $user->can('delete_any_my::comment');
     }
 
     /**
@@ -63,7 +63,7 @@ class CommentPolicy
      */
     public function forceDelete(User $user, Comment $comment): bool
     {
-        return $user->can('force_delete_comment');
+        return $user->can('force_delete_my::comment');
     }
 
     /**
@@ -71,7 +71,7 @@ class CommentPolicy
      */
     public function forceDeleteAny(User $user): bool
     {
-        return $user->can('force_delete_any_comment');
+        return $user->can('force_delete_any_my::comment');
     }
 
     /**
@@ -79,7 +79,7 @@ class CommentPolicy
      */
     public function restore(User $user, Comment $comment): bool
     {
-        return $user->can('restore_comment');
+        return $user->can('restore_my::comment');
     }
 
     /**
@@ -87,7 +87,7 @@ class CommentPolicy
      */
     public function restoreAny(User $user): bool
     {
-        return $user->can('restore_any_comment');
+        return $user->can('restore_any_my::comment');
     }
 
     /**
@@ -95,7 +95,7 @@ class CommentPolicy
      */
     public function replicate(User $user, Comment $comment): bool
     {
-        return $user->can('replicate_comment');
+        return $user->can('replicate_my::comment');
     }
 
     /**
@@ -103,6 +103,6 @@ class CommentPolicy
      */
     public function reorder(User $user): bool
     {
-        return $user->can('reorder_comment');
+        return $user->can('reorder_my::comment');
     }
 }

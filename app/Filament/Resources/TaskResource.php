@@ -28,7 +28,6 @@ class TaskResource extends Resource
 {
     protected static ?string $model = Task::class;
     protected static ?string $navigationGroup = 'Project Management (Admin)';
-
     protected static ?string $label = 'Task Controller';
     public static function form(Form $form): Form
     {
@@ -144,6 +143,7 @@ class TaskResource extends Resource
             'index' => Pages\ListTasks::route('/'),
             'create' => Pages\CreateTask::route('/create'),
             'edit' => Pages\EditTask::route('/{record}/edit'),
+            
         ];
     }
 
@@ -152,4 +152,5 @@ class TaskResource extends Resource
         $user = User::find(Auth::id());
         return Auth::check() && Auth::user() == $user->hasRole('super_admin');
     }
+    
 }

@@ -1,66 +1,114 @@
-<!-- <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Application Overview
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Support Dark Mode
 
-## About Laravel
+![Dark Mode](image.png)
+![Dark Mode](image-1.png)
+![Registration](image-3.png) Registration
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Admin Panel
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+![Admin Panel](image-25.png)
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### Features
+- Project Management for only super admin access.
+  - Comment Controller (add/delete/update/manipulate data)
+  - Dark mode, Light mode, System mode.
+  - Super admin can access 4 Navigation groups (Project, Project for admin, User management, Filament Shield for roles and permissions). The project management includes Projects, Tasks, and Comments.
+  - Two different user roles: admin (with access to a controller) and user.
 
-## Learning Laravel
+### Project Management Navigation
+![Project Management](image-24.png) Project management for panel_user role. Admin can also create their own projects, assign tasks, and comment. The Project Management (admin) navigation is a full access controller for admin only.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+#### Project Controller
+![Project Controller](image-6.png)  
+Can assign projects to multiple users, edit, and delete projects.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+![Projects Listed](image-8.png) After assigning to users, the projects are listed in a table.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+![Project Details](image-9.png) After assigning, the details are visible. Super admin, admin, and assigned users can comment on the project.
 
-## Laravel Sponsors
+![Commenting on a Project](image-10.png)
+![Admin Comment Controller](image-11.png) Admin comment controller table.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+![User Comment View](image-12.png) Comments visible to the assigned user.
 
-### Premium Partners
+#### Task Controller
+![Task Controller](image-14.png) Can create tasks for a project. Users cannot manipulate projects assigned by admin.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+#### Task Column
+![Task Column](image-15.png) Super admin can see, delete, and edit all tasks. Users can only see their own or assigned tasks.
 
-## Contributing
+#### Comments Controller
+![Comments Controller](image-17.png) Create comments controller, see who posted, edit, and delete comments.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+![Super Admin Comment Controller](image-18.png) Super admin comment controller table.
 
-## Code of Conduct
+### User Management
+![User Management](image-19.png) Creating users and assigning roles (super admin only).
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### Users Table (Super Admin Only)
+Admin can see all users:
+![Users Table](image-20.png) Users Table (Super admin only)
 
-## Security Vulnerabilities
+### Profile Management
+Admins and users can edit their profiles:
+![Edit Profile](image-21.png)
+![Edit Profile](image-22.png)
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+- Add profile picture
+- Update personal info
+- Manage other accounts/details
+  - API Token
+  - Save/Logout Browser Session
+  - Delete your own account
 
-## License
+### 2FA Authentication
+2FA authentication is currently disabled.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT). -->
+### Filament Shield Navigation
+#### Roles/Permissions
+![Roles/Permissions](image-23.png) Roles/Permissions
+
+This is the controller for user roles, determining whether they can view, edit, create, etc. Be careful when assigning access. The default role is `panel_user`. Below are the details:
+
+![Roles/Permissions Details](<Screenshot 2024-11-08 084606.png>)
+![Roles/Permissions Details](image-27.png)
+
+## User Panel
+
+### Interface
+![User Panel](image-28.png) Interface of panel_user role.
+
+### Navigation Groups
+There are two navigation groups: Project Management and User Management:
+![Navigation Groups](image-29.png)
+
+- Projects
+- Tasks (visible after clicking a project)
+- Comments
+- Edit Profile
+
+Panel users do not have access to super admin controllers and navigations.
+
+### Projects
+![Projects](image-30.png) Projects assigned by super_admin. Users cannot delete these projects but can edit and add their own tasks and comments.
+
+![Project Edit Restrictions](image-31.png) Users cannot edit the project name, status, and description. Only the assigner (super admin) can.
+
+### Edit Project Bottom Task/Comment
+![Edit Project Task/Comment](image-32.png) Tasks created by super admin and assigned to admin/user. Users can only edit the 'Status' or view the task. Only the creator can delete the task.
+![Edit Project Task/Comment](image-33.png)
+
+![Project Comment](image-34.png) Comments inside the project. Only the user who assigned the comment can delete/edit their own comment.
+![Project Comment](image-36.png)
+
+### Tasks
+![Tasks](image-37.png) View all created and assigned tasks.
+![Tasks](image-38.png) Create own task.
+
+### Comments
+![Comments](image-39.png) View all created comments and comments in the assigned project.
+
+### Edit Profile
+Nothing to show here. You can see it same as the Admin Edit Profile. You can see the photo up in the admin panel :).
