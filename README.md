@@ -3,9 +3,7 @@ This document provides an overview of the application's features, including user
 
 ---
 ## Home Page
-- Home Page: ![alt text](ReadmeImages/HomePage.png)
-
----
+- ![alt text](ReadmeImages/Homepage.png)
 
 ---
 
