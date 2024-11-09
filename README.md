@@ -30,6 +30,7 @@ The Admin Panel is accessible only to the super admin and includes:
 
 ### Project Management Navigation
 ![Project Management](ReadmeImages/image-24.png)
+
 Panel users (admins) can create their own projects, assign tasks, and add comments. The Project Management navigation is for admin use only.
 
 #### Project Controller
