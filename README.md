@@ -5,9 +5,12 @@ This document provides an overview of the application's features, including user
 ---
 
 ## Screenshots
-- Dark Mode:![Dark Mode](image.png)
-- Light Mode:![Light Mode](image-1.png)
-- Registration Page:![Registration](image-3.png)
+- Dark Mode:
+![Dark Mode](image.png)
+- Light Mode:
+![Light Mode](image-1.png)
+- Registration Page:
+![Registration](image-3.png)
 
 ---
 
@@ -31,6 +34,7 @@ The Admin Panel is accessible only to the super admin and includes:
 
 ### Project Management Navigation
 ![Project Management](image-24.png)
+
 Panel users (admins) can create their own projects, assign tasks, and add comments. The Project Management navigation is for admin use only.
 
 #### Project Controller
@@ -38,7 +42,7 @@ Panel users (admins) can create their own projects, assign tasks, and add commen
 - Assign projects to multiple users
 - Edit/delete projects
 - View project details in a table format:
-  ![Projects Listed](image-8.png)
+![Projects Listed](image-8.png)
   
 #### Project Details
 After assignment, super admins, admins, and assigned users can comment on projects:
@@ -46,17 +50,17 @@ After assignment, super admins, admins, and assigned users can comment on projec
 
 #### Comment Management
 - Super admins, admins, and assigned users can comment on projects:
-  ![Commenting on a Project](image-10.png)
+![Commenting on a Project](image-10.png)
 - Admin comment controller:
-  ![Admin Comment Controller](image-11.png)
+![Admin Comment Controller](image-11.png)
 - Assigned users can view comments:
-  ![User Comment View](image-12.png)
+![User Comment View](image-12.png)
 
 ---
 
 ### Task Controller
 - Tasks can be created per project and assigned to users, with visibility limited to their own or assigned tasks.
-  ![Task Controller](image-14.png)
+![Task Controller](image-14.png)
 
 #### Task Column
 Super admins can see, delete, and edit all tasks; users can access their own tasks.
@@ -64,9 +68,9 @@ Super admins can see, delete, and edit all tasks; users can access their own tas
 
 #### Comments Controller
 - Create and manage comments, with options to edit and delete:
-  ![Comments Controller](image-17.png)
+![Comments Controller](image-17.png)
 - Super admin comment table:
-  ![Super Admin Comment Controller](image-18.png)
+![Super Admin Comment Controller](image-18.png)
 
 ---
 
@@ -75,7 +79,7 @@ Super admins can create users and assign roles.
 ![User Management](image-19.png)
 - **Users Table (Super Admin Only)**:
   Super admins can view all users:
-  ![Users Table](image-20.png)
+![Users Table](image-20.png)
 
 ---
 
@@ -111,7 +115,7 @@ Users with the `panel_user` role have access to a restricted interface.
 Panel users have access to two navigation groups:
 - **Project Management** (projects, tasks, comments)
 - **User Management** (edit profile)
-  ![Navigation Groups](image-29.png)
+![Navigation Groups](image-29.png)
 
 Panel users have limited access compared to super admins and cannot access certain controllers.
 
@@ -127,18 +131,18 @@ Users cannot edit project details like name, status, or description; only the as
 
 #### Task/Comment Management
 - Users can edit the 'Status' of assigned tasks but cannot delete them:
-  ![Edit Project Task/Comment](image-32.png)
+![Edit Project Task/Comment](image-32.png)
 - Comments within the project are restricted to the assigner for editing/deletion:
-  ![Project Comment](image-34.png)
+![Project Comment](image-34.png)
 
 ---
 
 ### Tasks and Comments
 - **Tasks**: Users can view and create their own tasks.
-  ![Tasks](image-37.png)
-  ![Tasks](image-38.png)
+![Tasks](image-37.png)
+![Tasks](image-38.png)
 - **Comments**: View all created and assigned project comments.
-  ![Comments](image-39.png)
+![Comments](image-39.png)
 
 ---
 
