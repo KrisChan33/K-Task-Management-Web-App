@@ -3,7 +3,7 @@ This document provides an overview of the application's features, including user
 
 ---
 
-## Screenshots
+## Login/Register
 - Dark Mode: ![Dark Mode](ReadmeImages/image.png)
 - Light Mode: ![Dark Mode](ReadmeImages/image-1.png)
 - Registration Page: ![Registration](ReadmeImages/image-3.png)
