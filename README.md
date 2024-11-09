@@ -1,12 +1,13 @@
+
 # Application Overview
 This document provides an overview of the application's features, including user roles, project management, and navigation options.
 
 ---
 
 ## Screenshots
-- Dark Mode: ![Dark Mode](image.png)
-- Light Mode: ![Dark Mode](image-1.png)
-- Registration Page: ![Registration](image-3.png)
+- Dark Mode:![Dark Mode](image.png)
+- Light Mode:![Light Mode](image-1.png)
+- Registration Page:![Registration](image-3.png)
 
 ---
 
