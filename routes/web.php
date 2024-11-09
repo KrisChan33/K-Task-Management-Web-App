@@ -12,21 +12,21 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-    
+
 Route::get('/', function () {
     return view('welcome');
-});
+});    
 
-Route::get('login', function () {
-    return redirect('admin/login');
-})->name('login');
+// Route::get('/', function () {
+//     return redirect('admin/login');
+// })->name('login');
 
 Route::get('register', function () {
     return redirect('admin/register');
 })->name('register');
 
 Route::get('/home', function () {
-    return view('welcome');
+    return view('dashboard');
 });
 
 // Route::post('password/reset')->name('filament.K-Task-Management-Web-App.auth.password-reset.update');

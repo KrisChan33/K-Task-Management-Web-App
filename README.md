@@ -99,6 +99,12 @@ Two-factor authentication (2FA) is currently disabled.
 Super admins can manage user roles and permissions.
 ![Roles/Permissions](ReadmeImages/image-23.png)
 
+### Role Needed to set for 'panel_user'
+This is the important Becareful assigning Permissions.
+
+![alt text](ReadmeImages/paneluserrole.png)
+![alt text](ReadmeImages/paneluserrole (2).png)
+![alt text](ReadmeImages/paneluserrole (3).png)
 ---
 
 ## User Panel
@@ -111,8 +117,7 @@ Users with the `panel_user` role have access to a restricted interface.
 Panel users have access to two navigation groups:
 - **Project Management** (projects, tasks, comments)
 - **User Management** (edit profile)
-  ![Navigation Groups](ReadmeImages/image-29.png)
-
+![Navigation Groups](ReadmeImages/image-29.png)
 Panel users have limited access compared to super admins and cannot access certain controllers.
 
 ---
