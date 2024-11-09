@@ -103,8 +103,8 @@ Super admins can manage user roles and permissions.
 This is the important Becareful assigning Permissions.
 
 ![alt text](ReadmeImages/paneluserrole.png)
-![alt text](ReadmeImages/paneluserrole (2).png)
-![alt text](ReadmeImages/paneluserrole (3).png)
+![alt text](ReadmeImages/paneluserrole(2).png)
+![alt text](ReadmeImages/paneluserrole(3).png)
 ---
 
 ## User Panel
