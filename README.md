@@ -105,6 +105,7 @@ This is the important Becareful assigning Permissions.
 ![alt text](ReadmeImages/paneluserrole.png)
 ![alt text](ReadmeImages/paneluserrole-2.png)
 ![alt text](ReadmeImages/paneluserrole-3.png)
+
 ---
 
 ## User Panel
@@ -118,6 +119,7 @@ Panel users have access to two navigation groups:
 - **Project Management** (projects, tasks, comments)
 - **User Management** (edit profile)
 ![Navigation Groups](ReadmeImages/image-29.png)
+
 Panel users have limited access compared to super admins and cannot access certain controllers.
 
 ---
