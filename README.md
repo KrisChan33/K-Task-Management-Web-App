@@ -164,4 +164,39 @@ Users have similar profile-editing options as admins, including photo management
 
 ---
 
+## Default Credentials
+
+### Super Admin
+- **Email:** superadmin@gmail.com
+- **Password:** K-is-king
+
+### User
+- **Email:** student@gmail.com
+- **Password:** K-is-dev
+
+## Database and Zip File
+
+### Database
+The database file is located in the `database` directory. You can import it into your database management system.
+
+- **File:** `database/Database of K Management Web App/k-task-management-web-app-database.sql`
+
+### Zip File
+The zip file containing additional resources is located in the `resources` directory.
+
+- **File:** `you can download a zip file here in github`
+
+### Instructions
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/KrisChan33/K-Task-Management-Web-App
+    ```
+2. Navigate to the project directory
+   ```bash
+   cd K-Task-Management-Web-App
+    ```
+3. Import the database file into your database management system.
+4. Extract the zip file to access additional resources.
+
+---
 End of document.
