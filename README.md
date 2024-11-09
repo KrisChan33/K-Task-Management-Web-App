@@ -120,6 +120,7 @@ Panel users have access to two navigation groups:
 - **User Management** (edit profile)
 ![Navigation Groups](ReadmeImages/image-29.png)
 
+
 Panel users have limited access compared to super admins and cannot access certain controllers.
 
 ---
