@@ -1,139 +1,149 @@
 # Application Overview
+This document provides an overview of the application's features, including user roles, project management, and navigation options.
 
-## Support Dark Mode
+---
 
-![Dark Mode](image.png)
-![Dark Mode](image-1.png)
-![Registration](image-3.png) Registration
+## Screenshots
+- Dark Mode: ![Dark Mode](image.png)
+- Light Mode: ![Dark Mode](image-1.png)
+- Registration Page: ![Registration](image-3.png)
+
+---
 
 ## Admin Panel
 
-![Admin Panel](image-25.png)
-
 ### Features
-- Project Management for only super admin access.
-  - Comment Controller (add/delete/update/manipulate data)
-  - Dark mode, Light mode, System mode.
-  - Super admin can access 4 Navigation groups:
-    - Project
-    - Project for admin
-    - User management
-    - Filament Shield for roles and permissions
-  - The project management includes Projects, Tasks, and Comments.
-  - Two different user roles: admin (with access to a controller) and user.
+The Admin Panel is accessible only to the super admin and includes:
+- **Project Management** with the following controllers:
+  - Comments (add/delete/update)
+  - Dark, Light, and System modes
+- **Super Admin Navigation Groups**:
+  - Project Creation
+  - Admin Projects
+  - User Management
+  - Filament Shield (Roles & Permissions)
+- **User Roles**: 
+  - Admin (controller access)
+  - User
+
+---
 
 ### Project Management Navigation
-![Project Management](image-24.png) 
-Project management for panel_user role. Admin can also create their own projects, assign tasks, and comment. The Project Management (admin) navigation is a full access controller for admin only.
+![Project Management](image-24.png)
+Panel users (admins) can create their own projects, assign tasks, and add comments. The Project Management navigation is for admin use only.
 
 #### Project Controller
-![Project Controller](image-6.png)  
-Can assign projects to multiple users, edit, and delete projects.
+![Project Controller](image-6.png)
+- Assign projects to multiple users
+- Edit/delete projects
+- View project details in a table format:
+  ![Projects Listed](image-8.png)
+  
+#### Project Details
+After assignment, super admins, admins, and assigned users can comment on projects:
+![Project Details](image-9.png)
 
-![Projects Listed](image-8.png) 
-After assigning to users, the projects are listed in a table.
+#### Comment Management
+- Super admins, admins, and assigned users can comment on projects:
+  ![Commenting on a Project](image-10.png)
+- Admin comment controller:
+  ![Admin Comment Controller](image-11.png)
+- Assigned users can view comments:
+  ![User Comment View](image-12.png)
 
-![Project Details](image-9.png) 
-After assigning, the details are visible. Super admin, admin, and assigned users can comment on the project.
+---
 
-![Commenting on a Project](image-10.png)
-![Admin Comment Controller](image-11.png) 
-Admin comment controller table.
-
-![User Comment View](image-12.png) 
-Comments visible to the assigned user.
-
-#### Task Controller
-![Task Controller](image-14.png) 
-Can create tasks for a project. Users cannot manipulate projects assigned by admin.
+### Task Controller
+- Tasks can be created per project and assigned to users, with visibility limited to their own or assigned tasks.
+  ![Task Controller](image-14.png)
 
 #### Task Column
-![Task Column](image-15.png) 
-Super admin can see, delete, and edit all tasks. Users can only see their own or assigned tasks.
+Super admins can see, delete, and edit all tasks; users can access their own tasks.
+![Task Column](image-15.png)
 
 #### Comments Controller
-![Comments Controller](image-17.png) 
-Create comments controller, see who posted, edit, and delete comments.
+- Create and manage comments, with options to edit and delete:
+  ![Comments Controller](image-17.png)
+- Super admin comment table:
+  ![Super Admin Comment Controller](image-18.png)
 
-![Super Admin Comment Controller](image-18.png) 
-Super admin comment controller table.
+---
 
 ### User Management
-![User Management](image-19.png) 
-Creating users and assigning roles (super admin only).
+Super admins can create users and assign roles.
+![User Management](image-19.png)
+- **Users Table (Super Admin Only)**:
+  Super admins can view all users:
+  ![Users Table](image-20.png)
 
-### Users Table (Super Admin Only)
-Admin can see all users:
-![Users Table](image-20.png) 
-Users Table (Super admin only)
+---
 
 ### Profile Management
-Admins and users can edit their profiles:
+Both admins and users can edit their profiles, with options to:
+- Add profile pictures
+- Update personal information
+- Manage accounts (API Tokens, browser sessions, account deletion)
+  
 ![Edit Profile](image-21.png)
 ![Edit Profile](image-22.png)
 
-- Add profile picture
-- Update personal info
-- Manage other accounts/details
-  - API Token
-  - Save/Logout Browser Session
-  - Delete your own account
+---
 
 ### 2FA Authentication
-2FA authentication is currently disabled.
+Two-factor authentication (2FA) is currently disabled.
 
-### Filament Shield Navigation
-#### Roles/Permissions
-![Roles/Permissions](image-23.png) 
-Roles/Permissions
+---
 
-This is the controller for user roles, determining whether they can view, edit, create, etc. Be careful when assigning access. The default role is `panel_user`. Below are the details:
+### Filament Shield Navigation (Roles & Permissions)
+Super admins can manage user roles and permissions.
+![Roles/Permissions](image-23.png)
 
-![Roles/Permissions Details](<Screenshot 2024-11-08 084606.png>)
-![Roles/Permissions Details](image-27.png)
+---
 
 ## User Panel
 
-### Interface
-![User Panel](image-28.png) 
-Interface of panel_user role.
+### User Interface
+Users with the `panel_user` role have access to a restricted interface.
+![User Panel](image-28.png)
 
 ### Navigation Groups
-There are two navigation groups: Project Management and User Management:
-![Navigation Groups](image-29.png)
+Panel users have access to two navigation groups:
+- **Project Management** (projects, tasks, comments)
+- **User Management** (edit profile)
+  ![Navigation Groups](image-29.png)
 
-- Projects
-- Tasks (visible after clicking a project)
-- Comments
-- Edit Profile
+Panel users have limited access compared to super admins and cannot access certain controllers.
 
-Panel users do not have access to super admin controllers and navigations.
+---
 
 ### Projects
-![Projects](image-30.png) 
-Projects assigned by super_admin. Users cannot delete these projects but can edit and add their own tasks and comments.
+Users can view projects assigned by super admins but cannot delete them. They can, however, edit tasks and add comments.
+![Projects](image-30.png)
 
-![Project Edit Restrictions](image-31.png) 
-Users cannot edit the project name, status, and description. Only the assigner (super admin) can.
+#### Project Edit Restrictions
+Users cannot edit project details like name, status, or description; only the assigner can.
+![Project Edit Restrictions](image-31.png)
 
-### Edit Project Bottom Task/Comment
-![Edit Project Task/Comment](image-32.png) 
-Tasks created by super admin and assigned to admin/user. Users can only edit the 'Status' or view the task. Only the creator can delete the task.
-![Edit Project Task/Comment](image-33.png)
+#### Task/Comment Management
+- Users can edit the 'Status' of assigned tasks but cannot delete them:
+  ![Edit Project Task/Comment](image-32.png)
+- Comments within the project are restricted to the assigner for editing/deletion:
+  ![Project Comment](image-34.png)
 
-![Project Comment](image-34.png) 
-Comments inside the project. Only the user who assigned the comment can delete/edit their own comment.
-![Project Comment](image-36.png)
+---
 
-### Tasks
-![Tasks](image-37.png) 
-View all created and assigned tasks.
-![Tasks](image-38.png) 
-Create own task.
+### Tasks and Comments
+- **Tasks**: Users can view and create their own tasks.
+  ![Tasks](image-37.png)
+  ![Tasks](image-38.png)
+- **Comments**: View all created and assigned project comments.
+  ![Comments](image-39.png)
 
-### Comments
-![Comments](image-39.png) 
-View all created comments and comments in the assigned project.
+---
 
 ### Edit Profile
-Nothing to show here. You can see it same as the Admin Edit Profile. You can see the photo up in the admin panel :).
+Users have similar profile-editing options as admins, including photo management (see Admin Edit Profile for example).
+
+---
+
+End of document.
