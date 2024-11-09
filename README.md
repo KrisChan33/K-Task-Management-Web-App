@@ -35,10 +35,14 @@ The Admin Panel is accessible only to the super admin and includes:
 ### Project Management Navigation
 ![Project Management](ReadmeImages/image-24.png)
 
-Panel users (admins) can create their own projects, assign tasks, and add comments. The Project Management navigation is for admin use only.
+admins can also create their own projects.
+
+
 
 #### Project Controller
+Admin can assign tasks, and add comments. The Project Management navigation is for admin use only.
 ![Project Controller](ReadmeImages/image-6.png)
+ 
 - Assign projects to multiple users
 - Edit/delete projects
 - View project details in a table format:
@@ -104,7 +108,7 @@ Super admins can manage user roles and permissions.
 ![Roles/Permissions](ReadmeImages/image-23.png)
 
 ### Role Needed to set for 'panel_user'
-This is the important Becareful assigning Permissions.
+This is the important Be Careful assigning Permissions. use this for Default.
 
 ![alt text](ReadmeImages/paneluserrole.png)
 ![alt text](ReadmeImages/paneluserrole-2.png)
@@ -122,6 +126,7 @@ Users with the `panel_user` role have access to a restricted interface.
 Panel users have access to two navigation groups:
 - **Project Management** (projects, tasks, comments)
 - **User Management** (edit profile)
+
 ![Navigation Groups](ReadmeImages/image-29.png)
 
 
@@ -130,7 +135,7 @@ Panel users have limited access compared to super admins and cannot access certa
 ---
 
 ### Projects
-Users can view projects assigned by super admins but cannot delete them. They can, however, edit tasks and add comments.
+Users can view projects assigned by super admins but cannot delete them.
 ![Projects](ReadmeImages/image-30.png)
 
 #### Project Edit Restrictions
