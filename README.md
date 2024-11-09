@@ -199,4 +199,9 @@ The zip file containing additional resources is located in the `resources` direc
 4. Extract the zip file to access additional resources.
 
 ---
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+---
 End of document.
