@@ -187,6 +187,16 @@ The zip file containing additional resources is located in the `resources` direc
 
 - **File:** `you can download a zip file here in github`
 
+## Requirements
+
+Before you begin, ensure you have met the following requirements:
+
+- **PHP**: ^8.1
+- **Composer**: Latest version
+- **Node.js**: Latest LTS version (if using frontend assets)
+- **npm**: Latest version (if using frontend assets)
+- **Database**: MySQL or any other supported database
+
 ## Instructions
 
 ### 1. Clone the repository:
