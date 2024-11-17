@@ -187,19 +187,91 @@ The zip file containing additional resources is located in the `resources` direc
 
 - **File:** `you can download a zip file here in github`
 
-### Instructions
-1. Clone the repository:
-   ```bash
+## Instructions
+
+### 1. Clone the repository:
+  ```bash
    git clone https://github.com/KrisChan33/K-Task-Management-Web-App
-    ```
-2. Navigate to the project directory
-   ```bash
-   cd K-Task-Management-Web-App
-    ```
-3. Import the database file into your database management system.
-4. Extract the zip file to access additional resources.
+  ```
+---
+### 2. Import the Database
+ Import the database file into your database management system for Default Permissions,  Run Migration if not.
+---
+### 3. Extract the Zip File
+ Extract the zip file to access additional resources.
 
 ---
+
+### 4. Navigate to the Project Directory.
+Open your terminal and navigate to the folder where you cloned the project:
+```bash
+cd K-Task-Management-Web-App
+```
+
+---
+
+### 5. Install Dependencies
+Install all required PHP dependencies using Composer:
+```bash
+composer install
+```
+
+---
+
+### 6. Set Up the Environment File
+- Copy the `.env.example` file to `.env`:
+   ```bash
+   cp .env.example .env
+   ```
+- Edit the `.env` file and configure your database credentials and other settings.
+---
+
+### 7. Generate an Application Key
+Run the following command to generate a new application key:
+```bash
+php artisan key:generate
+```
+
+---
+
+### 8. Set Up the Database
+- Ensure you have a database ready and update the `.env` file with the database credentials.
+
+- Run the migrations to create the necessary tables in the database:
+   ```bash
+   php artisan migrate 
+   ```
+  ```bash
+   php artisan migrate --seed     = for include the user and super admin account.
+   ```
+
+---
+
+### 9. Start the Development Server
+Start the Laravel development server using Artisan:
+```bash
+php artisan serve
+```
+The server will run at [http://localhost:8000](http://localhost:8000) by default.
+
+---
+
+## 10. (Optional) Install Node.js Dependencies
+If the project uses frontend assets, you might need to install Node.js dependencies:
+```bash
+npm install
+```
+Then compile the assets:
+```bash
+npm run dev
+```
+
+---
+
+## Troubleshooting
+- If you encounter missing `.env` or permissions errors, double-check file paths and server requirements.
+- If `php artisan` commands fail, ensure PHP and Composer are installed and properly configured.
+
 
 ## License
 
