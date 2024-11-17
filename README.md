@@ -202,6 +202,6 @@ The zip file containing additional resources is located in the `resources` direc
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the Apache 2.0 License - see the [LICENSE](LICENSE) file for details.
 ---
 End of document.

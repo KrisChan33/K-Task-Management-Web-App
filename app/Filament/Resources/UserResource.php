@@ -68,6 +68,7 @@ class UserResource extends Resource
                                 ->hint('Enter the email')
                                 ->hintIcon('heroicon-m-question-mark-circle', tooltip: 'This is the email address of the User')
                                 ->required(),
+
                             TextInput::make('password')
                                 ->label('Password')
                                 ->autocomplete(true)
@@ -154,7 +155,6 @@ class UserResource extends Resource
         //                
             ])
             ->actions([
-              
                 ActionGroup::make([
                     ViewAction::make(),
                     EditAction::make(),
