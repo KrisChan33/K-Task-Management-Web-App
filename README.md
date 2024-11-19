@@ -218,64 +218,8 @@ Open your terminal and navigate to the folder where you cloned the project:
 cd K-Task-Management-Web-App
 ```
 
----
-
-### 5. Install Dependencies
-Install all required PHP dependencies using Composer:
-```bash
-composer install
-```
-
----
-
-### 6. Set Up the Environment File
-- Copy the `.env.example` file to `.env`:
-   ```bash
-   cp .env.example .env
-   ```
-- Edit the `.env` file and configure your database credentials and other settings.
----
-
-### 7. Generate an Application Key
-Run the following command to generate a new application key:
-```bash
-php artisan key:generate
-```
-
----
-
-### 8. Set Up the Database
-- Ensure you have a database ready and update the `.env` file with the database credentials.
-
-- Run the migrations to create the necessary tables in the database:
-   ```bash
-   php artisan migrate 
-   ```
-  ```bash
-   php artisan migrate --seed     = for include the user and super admin account.
-   ```
-
----
-
-### 9. Start the Development Server
-Start the Laravel development server using Artisan:
-```bash
-php artisan serve
-```
-The server will run at [http://localhost:8000](http://localhost:8000) by default.
-
----
-
-## 10. (Optional) Install Node.js Dependencies
-If the project uses frontend assets, you might need to install Node.js dependencies:
-```bash
-npm install
-```
-Then compile the assets:
-```bash
-npm run dev
-```
-
+### 5 - 10 to be Followed
+- Currently Working
 ---
 
 ## Troubleshooting
