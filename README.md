@@ -26,7 +26,7 @@ The Admin Panel is accessible only to the super admin and includes:
   - Project Creation
   - Admin Projects
   - User Management
-  - Filament Shield (Roles & Permissions)
+  - Spatie Roles & Permissions
 - **User Roles**: 
   - Admin (controller access)
   - User
@@ -104,7 +104,7 @@ Two-factor authentication (2FA) is currently disabled.
 
 ---
 
-### Filament Shield Navigation (Roles & Permissions)
+### Spatie (Roles & Permissions) Navigation 
 Super admins can manage user roles and permissions.
 ![Roles/Permissions](ReadmeImages/image-23.png)
 
