@@ -8,7 +8,6 @@
 .env
 .env.backup
 .env.production
-.env.example
 .phpunit.result.cache
 Homestead.json
 Homestead.yaml
@@ -25,9 +24,6 @@ yarn-error.log
 /storage/framework/sessions
 /storage/framework/views
 
-# Composer
-composer.lock
-
 # Vite
 /vite.config.js
 
@@ -39,3 +35,9 @@ Thumbs.db
 /.project
 /.classpath
 /.settings/
+
+
+# composer
+composer.lock
+composer.json
+package.json
