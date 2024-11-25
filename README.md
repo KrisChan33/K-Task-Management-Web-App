@@ -28,8 +28,9 @@ The Admin Panel overview, including project management and user role features, i
 ---
 
 ## User Panel
-![User Panel](ReadmeImages/image-28.png)
 For an overview of the User Panel and its navigation options, visit the [User Panel Wiki](https://github.com/KrisChan33/K-Task-Management-Web-App/wiki/3.-User-Panel).  
+
+![User Panel](ReadmeImages/image-28.png)
 
 ---
 
