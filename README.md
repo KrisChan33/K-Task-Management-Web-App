@@ -24,7 +24,6 @@ Detailed documentation for Login and Registration features can be found [here](h
 
 ## Admin Panel
 The Admin Panel overview, including project management and user role features, is explained in detail in the [Admin Panel Wiki](https://github.com/KrisChan33/K-Task-Management-Web-App/wiki/2.-Admin-Panel).  
-![Admin Panel](ReadmeImages/image-24.png)
 
 ---
 
