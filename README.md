@@ -7,6 +7,7 @@ This document provides a summary of the app's features and setup. For detailed i
 
 ## Home Page
 View the main page structure and navigation options in the [Home Page Wiki](https://github.com/KrisChan33/K-Task-Management-Web-App/wiki/1.-Home-Page).  
+
 ![Home Page](ReadmeImages/Homepage.png)
 
 ---
@@ -51,7 +52,7 @@ Detailed documentation for Login and Registration features can be found [here](h
 ---
 
 ## Setup Instructions
-Complete installation and setup instructions are available in the [Setup Requirements Wiki](https://github.com/KrisChan33/K-Task-Management-Web-App/wiki/7.-Instructions).
+- Complete installation and setup instructions are available in the [Setup Requirements Wiki](https://github.com/KrisChan33/K-Task-Management-Web-App/wiki/7.-Instructions).
 
 ## License
  This project is licensed under the Apache 2.0 License - see the [LICENSE](LICENSE) file for details.
