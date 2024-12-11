@@ -62,8 +62,14 @@
             <div class="max-w-7xl  mt-6 mx-auto p-6 lg:p-8">
                
                 <div class="flex justify-center">
-            <h1 class=" font-semibold text-gray-900 dark:text-white" style="font-size: 2.5rem;">K Task Management Web Application</h1>
+                    <h1 class=" font-semibold text-gray-900 dark:text-white" style="font-size: 2.5rem;">K Task Management Web Application</h1>
                 </div>
+
+                <div class="flex justify-center mt-6">
+                    <h2 class=" font-semibold text-gray-900 dark:text-white" style="font-size: 1rem;">Temporary Landing Page</h2>
+                </div>
+
+
                 <div class="mt-16">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
 
